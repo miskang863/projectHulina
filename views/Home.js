@@ -9,10 +9,12 @@ import {Header} from 'native-base';
 const Home = ({navigation}) => {
   return (
     <View style={styles.container}>
-          <Header><Text>HELSINGIN HULINAT</Text></Header>
-
+<Header>
+  <Text style={styles.headerText}>Helsingin Hulinat</Text>
+</Header>
+<Text>Hot Right Now:</Text>
     <List navigation={navigation}/>
-    <StatusBar style="auto" />
+    <StatusBar style="dark"/>
   </View>
  )};
 
@@ -20,8 +22,13 @@ const styles = StyleSheet.create({
   container: {
     paddingTop: 20,
     backgroundColor: '#fff',
-    paddingHorizontal: 5,
+    //  paddingHorizontal: 5,
   },
+  headerText: {
+    color: '#fff',
+    paddingTop: 20,
+    fontSize: 18,
+  }
 });
 
 Home.propTypes = {

@@ -5,13 +5,14 @@ import { StyleSheet, Text,  Image } from 'react-native';
 import {ListItem as CoolListItem, Thumbnail, Left, Body, Right, Button } from 'native-base';
 
 const testImg = 'https://www.thesprucepets.com/thmb/xdBOcy1ctLYF7j3y1vaDtVijWxM=/2997x2248/smart/filters:no_upscale()/kitten-looking-at-camera-521981437-57d840213df78c583374be3b.jpg';
+const apiUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
-const ListItem = ({navigation}) => {
+const ListItem = ({navigation, singleEvent}) => {
   return (
 
         <CoolListItem thumbnail>
           <Left>
-            <Thumbnail square source={{ uri: testImg }} />
+            <Thumbnail square source={{ uri: apiUrl +  singleEvent.thumbnails.w160}} />
           </Left>
           <Body>
             <Text>Event Name</Text>
@@ -36,6 +37,7 @@ const styles = StyleSheet.create({
 
 ListItem.propTypes = {
   navigation: PropTypes.object,
+  singleEvent: PropTypes.object,
 };
 
 export default ListItem;

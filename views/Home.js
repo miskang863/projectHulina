@@ -1,23 +1,31 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import { StyleSheet, Text,  Image, View } from 'react-native';
+import List from '../components/List';
+import {FlatList} from 'react-native-gesture-handler';
+import {Header} from 'native-base';
 
-const Home = () => {
+const Home = ({navigation}) => {
   return (
     <View style={styles.container}>
-      <StatusBar style='auto' />
-      <Text>THIS IS HOME</Text>
-    </View>
-  );
-};
+          <Header><Text>HELSINGIN HULINAT</Text></Header>
+
+    <List navigation={navigation}/>
+    <StatusBar style="auto" />
+  </View>
+ )};
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    paddingTop: 20,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    paddingHorizontal: 5,
   },
 });
+
+Home.propTypes = {
+  navigation: PropTypes.object,
+};
 
 export default Home;

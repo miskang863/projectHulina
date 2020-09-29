@@ -12,7 +12,7 @@ const Navigator = () => {
       <Tab.Navigator>
         <Tab.Screen name='Home' component={Home} />
         <Tab.Screen name='Profile' component={Profile} />
-      </Tab.Navigator>{' '}
+      </Tab.Navigator>
     </NavigationContainer>
   );
 };

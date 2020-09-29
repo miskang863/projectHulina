@@ -5,8 +5,8 @@ import { StyleSheet, Text, View } from 'react-native';
 const Home = () => {
   return (
     <View style={styles.container}>
-      <Text>THIS IS HOME</Text>
       <StatusBar style='auto' />
+      <Text>THIS IS HOME</Text>
     </View>
   );
 };
@@ -19,3 +19,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+export default Home;

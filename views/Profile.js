@@ -1,12 +1,16 @@
 import { View } from 'native-base';
 import React from 'react';
 import { StyleSheet, SafeAreaView, Text } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
+
 
 const Profile = () => {
   return (
-    <View>
-      <Text>PROFIILI</Text>
-    </View>
+    <View style={styles.container}>
+    <StatusBar style='auto' />
+    <Text>THIS IS PROFILE</Text>
+  </View>
+
   );
 };
 

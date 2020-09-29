@@ -1,6 +1,6 @@
 import { View } from 'native-base';
 import React from 'react';
-import { StyleSheet, SafeAreaView, Text } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 
 

@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, SafeAreaView } from 'react-native';
-import List from '../component/List';
+import List from '../components/List';
 import PropTypes from 'prop-types';
 
 

@@ -39,13 +39,7 @@ const StackScreen = () => {
   );
 };
 
-const Navigator = () => {
-  return (
-    <NavigationContainer>
-      <StackScreen />
-    </NavigationContainer>
-  );
-};
+
 
 export default Navigator;
 

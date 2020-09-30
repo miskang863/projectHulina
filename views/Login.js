@@ -30,8 +30,7 @@ const Login = ({navigation}) => { // props is needed for navigation
         setIsLoggedIn(true);
         await AsyncStorage.setItem('userToken', 'abc');
         navigation.navigate('Home');
-    }
-  };
+    };  
 
   return (
     <View style={styles.container}>
@@ -39,6 +38,8 @@ const Login = ({navigation}) => { // props is needed for navigation
       <Button title="Sign in!" onPress={logIn}/>
     </View>
   );
+};
+
 
 
 const styles = StyleSheet.create({

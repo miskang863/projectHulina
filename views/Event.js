@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
-const Single = ({route}) => {
+const Event = ({route}) => {
   const {file} = route.params;
   console.log('kuva', mediaUrl + file.filename);
   return (

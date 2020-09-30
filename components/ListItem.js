@@ -15,8 +15,8 @@ const ListItem = ({navigation, singleEvent}) => {
             <Thumbnail square source={{ uri: apiUrl +  singleEvent.thumbnails.w160}} />
           </Left>
           <Body>
-            <Text>Event Name</Text>
-            <Text note numberOfLines={1}>Event time?</Text>
+            <Text>{singleEvent.title}</Text>
+            <Text note numberOfLines={1}>{singleEvent.description}</Text>
           </Body>
           <Right>
             <Button transparent>

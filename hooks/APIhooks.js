@@ -1,4 +1,6 @@
 import {useState, useEffect} from 'react';
+import axios from 'axios';
+
 const apiUrl = 'http://media.mw.metropolia.fi/wbma/';
 
 
@@ -14,7 +16,6 @@ const loadEvent = async () => {
           const json2 = await resp2.json();
           return json2;
         }));
-         console.log('loadEvent', event);
         setEventArray(event);
       } catch (e) {
         console.error(e);
@@ -27,6 +28,21 @@ const loadEvent = async () => {
     return eventArray;
   };
 
+  const postEvent = async (fd, token) => {
+    const options = {
+      method: 'POST',
+      headers: {
+        'x-access-token': token,
+      },
+      data: fd,
+      url: apiUrl + 'media',
+    };
+    try {
+      const response = await axios(options);
+      return response.data;
+    } catch (e) {
+      throw new Error(e.message);
+    }
+    };
 
-
-export {useLoadEvent,};
+export {useLoadEvent, postEvent,};

@@ -1,10 +1,14 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import Home from '../views/Home';
 import Profile from '../views/Profile';
+import Event from '../views/Event';
+import Login from '../views/Login';
+import {AuthContext} from '../contexts/AuthContext';
 
 const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
 
 const Navigator = () => {
   return (
@@ -17,4 +21,31 @@ const Navigator = () => {
   );
 };
 
+const StackScreen = () => {
+  const [isLoggedIn] = useContext(AuthContext);
+  return (
+    <Stack.Navigator>
+      {isLoggedIn ? (
+        <>
+          <Stack.Screen name="Home" component={TabScreen} />
+          <StackScreen name="Event" component={Event} />         
+        </>
+      ) : (
+          <>
+            <Stack.Screen name="Login" component={Login} />
+          </>
+        )}
+    </Stack.Navigator>
+  );
+};
+
+const Navigator = () => {
+  return (
+    <NavigationContainer>
+      <StackScreen />
+    </NavigationContainer>
+  );
+};
+
 export default Navigator;
+

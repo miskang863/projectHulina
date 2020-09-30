@@ -1,43 +1,65 @@
-import { StatusBar } from 'expo-status-bar';
+import React from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Image,
+} from 'react-native';
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import { StyleSheet, Text,  Image } from 'react-native';
-import {ListItem as CoolListItem, Thumbnail, Left, Body, Right, Button } from 'native-base';
 
-const testImg = 'https://www.thesprucepets.com/thmb/xdBOcy1ctLYF7j3y1vaDtVijWxM=/2997x2248/smart/filters:no_upscale()/kitten-looking-at-camera-521981437-57d840213df78c583374be3b.jpg';
-const apiUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
+const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
-const ListItem = ({navigation, singleEvent}) => {
+const ListItem = ({navigation, singleMedia}) => {
   return (
-
-        <CoolListItem thumbnail>
-          <Left>
-            <Thumbnail square source={{ uri: apiUrl +  singleEvent.thumbnails.w160}} />
-          </Left>
-          <Body>
-            <Text>Event Name</Text>
-            <Text note numberOfLines={1}>Event time?</Text>
-          </Body>
-          <Right>
-            <Button transparent>
-              <Text>View</Text>
-            </Button>
-          </Right>
-        </CoolListItem>
- )};
+    <TouchableOpacity style={styles.row} onPress={
+      () => {
+        navigation.navigate('Event', {file: singleMedia});
+      }
+    }>
+      <View style={styles.imagebox}>
+        <Image
+          style={styles.image}
+          source={{uri: mediaUrl + singleMedia.thumbnails.w160}}
+        />
+      </View>
+      <View style={styles.textbox}>
+        <Text style={styles.listTitle}>{singleMedia.title}</Text>
+        <Text>{singleMedia.description}</Text>
+      </View>
+    </TouchableOpacity>
+  );
+};
 
 const styles = StyleSheet.create({
-  container: {
+  row: {
+    flexDirection: 'row',
+    padding: 15,
+    marginBottom: 5,
+    backgroundColor: '#eee',
+    borderRadius: 16,
+  },
+  imagebox: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+  },
+  image: {
+    flex: 1,
+    borderRadius: 16,
+  },
+  textbox: {
+    flex: 2,
+    padding: 10,
+  },
+  listTitle: {
+    fontWeight: 'bold',
+    fontSize: 20,
+    paddingBottom: 15,
   },
 });
 
 ListItem.propTypes = {
+  singleMedia: PropTypes.object,
   navigation: PropTypes.object,
-  singleEvent: PropTypes.object,
 };
 
 export default ListItem;

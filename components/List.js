@@ -9,8 +9,6 @@ import {useLoadEvent} from '../hooks/APIhooks';
 const List = ({navigation}) => {
       const eventArray = useLoadEvent();
 
-
-
   return (
 <FlatList
       data={eventArray}

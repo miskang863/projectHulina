@@ -6,7 +6,7 @@ const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
 const Event = ({route}) => {
   const {file} = route.params;
-  console.log('kuva', mediaUrl + file.filename);
+  //console.log('kuva', mediaUrl + file.filename);
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>{file.title}</Text>

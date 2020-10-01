@@ -40,8 +40,6 @@ const Login = ({navigation}) => { // props is needed for navigation
   );
 };
 
-
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,

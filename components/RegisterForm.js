@@ -6,7 +6,6 @@ import {
 import PropTypes from 'prop-types';
 import {AuthContext} from '../contexts/AuthContext';
 import AsyncStorage from '@react-native-community/async-storage';
-// import {postLogIn} from '../hooks/APIhooks';
 import FormTextInput from './FormTextInput';
 import useSignUpForm from '../hooks/RegisterHooks';
 import {postRegistration, postLogIn} from '../hooks/APIhooks';

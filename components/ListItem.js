@@ -4,10 +4,16 @@ import React, { Component } from 'react';
 import { StyleSheet, Text,  Image } from 'react-native';
 import {ListItem as CoolListItem, Thumbnail, Left, Body, Right, Button } from 'native-base';
 
-const testImg = 'https://www.thesprucepets.com/thmb/xdBOcy1ctLYF7j3y1vaDtVijWxM=/2997x2248/smart/filters:no_upscale()/kitten-looking-at-camera-521981437-57d840213df78c583374be3b.jpg';
 const apiUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
 const ListItem = ({navigation, singleEvent}) => {
+  const allData = JSON.parse(singleEvent.description);
+  const description = allData.description;
+  const dateTime = allData.dateTime;
+  const address = allData.address;
+  const city = allData.city;
+  console.log(city);
+
   return (
 
         <CoolListItem thumbnail>
@@ -16,7 +22,9 @@ const ListItem = ({navigation, singleEvent}) => {
           </Left>
           <Body>
             <Text>{singleEvent.title}</Text>
-            <Text note numberOfLines={1}>{singleEvent.description}</Text>
+  <Text>{city}</Text>
+            <Text>{dateTime}</Text>
+
           </Body>
           <Right>
             <Button transparent>

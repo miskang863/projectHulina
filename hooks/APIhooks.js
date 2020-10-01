@@ -9,14 +9,16 @@ const useLoadEvent = () => {
 
 const loadEvent = async () => {
     try {
-        const response = await fetch(apiUrl + 'media');
-        const json = await response.json();
-        const event = await Promise.all(json.map(async (item) => {
+      const response = await fetch(apiUrl + 'tags/' + 'helsinginhulinat9999');
+      const json = await response.json();
+      let event = await Promise.all(
+        json.map(async (item) => {
           const resp2 = await fetch(apiUrl + 'media/' + item.file_id);
           const json2 = await resp2.json();
           return json2;
-        }));
-        setEventArray(event);
+        })
+      );
+       setEventArray(event);
       } catch (e) {
         console.error(e);
       }
@@ -37,6 +39,7 @@ const loadEvent = async () => {
       data: formData,
       url: apiUrl + 'media',
     };
+    console.log('postevent opt', options);
     try {
       const response = await axios(options);
       return response.data;
@@ -65,5 +68,27 @@ const loadEvent = async () => {
       }
     };
 
+    const postTag = async (tag, token) => {
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-access-token': token,
+        },
+        body: JSON.stringify(tag),
+      };
+      try {
+        const response = await fetch(apiUrl + 'tags', options);
+        const result = await response.json();
+        if (response.ok) {
+          return result;
+        } else {
+          throw new Error(result.message);
+        }
+      } catch (e) {
+        throw new Error(e.message);
+      }
+    };
+    
 
-export {useLoadEvent, postEvent, checkToken,};
+export {useLoadEvent, postEvent, checkToken, postTag};

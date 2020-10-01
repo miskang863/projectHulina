@@ -1,30 +1,54 @@
 import React, {useEffect, useState} from 'react';
-import { StyleSheet, Text, Image } from 'react-native';
+import { StyleSheet, Text, Image, View } from 'react-native';
 import PropTypes from 'prop-types';
 import { StatusBar } from 'expo-status-bar';
 import { Container, Header, Content, Form, Button, Icon } from 'native-base';
 import FormTextInput from '../components/FormTextInput';
 import * as Permissions from 'expo-permissions';
 import * as ImagePicker from 'expo-image-picker';
-import useAddEventHooks from '../hooks/AddEventHooks';
-import {postEvent} from '../hooks/APIhooks';
+import useAddEventForm from '../hooks/AddEventHooks';
+import {postEvent, postTag} from '../hooks/APIhooks';
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 // import AsyncStorage from '@react-native-community/async-storage';
 
 
 
 const AddEvent = ({navigation}) => {
+    const [isDatePickerVisible, setDatePickerVisibility] = useState(false); 
+    const [dateTime, setDateTime] = useState(null);
     const [image, setImage] = useState(null);
     const [fileType, setFileType] = useState('image');
-    const { handleInputChange,  inputs } = useAddEventHooks();
+    const { handleInputChange,  inputs, addEventErrors } = useAddEventForm();
 
-
+  
+    const showDatePicker = () => {
+      setDatePickerVisibility(true);
+    };
+  
+    const hideDatePicker = () => {
+      setDatePickerVisibility(false);
+    };
+  
+    const handleConfirm = (date) => {
+      const euroDate = date.getDate() + '.' + date.getMonth() + '.' + date.getFullYear();
+      const dateFormatted = euroDate + ' ' +  date.toLocaleTimeString();
+      setDateTime(dateFormatted);
+      hideDatePicker();
+    };
 
    const doAddEvent = async () => {
 
     try {
       const formData = new FormData();
+      const moreData = {
+        description: inputs.description,
+        address: inputs.address,
+        city: inputs.city,
+        dateTime: dateTime,
+      };
+
       formData.append('title', inputs.title);
-      formData.append('description', inputs.description);
+      formData.append('description', JSON.stringify(moreData));
 
       const filename = image.split('/').pop();
       const match = /\.(\w+)$/.exec(filename);
@@ -38,7 +62,16 @@ const AddEvent = ({navigation}) => {
       const userToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo4NDQsInVzZXJuYW1lIjoibWlza3Rlc3QiLCJlbWFpbCI6InRlc3RlckB0ZXN0ZWQuY29tIiwiZnVsbF9uYW1lIjpudWxsLCJpc19hZG1pbiI6bnVsbCwidGltZV9jcmVhdGVkIjoiMjAyMC0xMC0wMVQwNjo0Mjo0OC4wMDBaIiwiaWF0IjoxNjAxNTM0NTk5LCJleHAiOjE2MDM2MDgxOTl9.9XlU49WcZ6cSzkZxLV2fEQkv_pbo9wBCj0vgMLVI0oo";
       const resp = await postEvent(formData, userToken);
       console.log('upload', resp);
-      
+
+      const postTagResponse = await postTag(
+        {
+          file_id: resp.file_id,
+          tag: 'helsinginhulinat9999',
+        },
+        userToken
+      );
+      console.log('Posting  tag:', postTagResponse);
+
        setTimeout(() => {
         navigation.push('Home');
        }, 2000);
@@ -80,6 +113,7 @@ const AddEvent = ({navigation}) => {
       };
 
     
+   
 
   return (
     <Container style={styles.container}>
@@ -93,28 +127,65 @@ const AddEvent = ({navigation}) => {
 
         }
 
+      <Button block onPress={pickImage}>
+          <Text>Select image</Text>
+        </Button>
+       <Button block onPress={showDatePicker}>
+         <Text>Select date and time</Text>
+       </Button>
       <Form style={{padding: 15}}>
         <FormTextInput
-        autoCapitalize="none"
+        autoCapitalize='none'
         placeholder='Event name'
         value={inputs.title}
         onChangeText={(txt) => handleInputChange('title', txt)}
-/>
+        error={addEventErrors.title}
+        />
         <FormTextInput
         autoCapitalize="none"
         placeholder='Description'
         value={inputs.description}
         onChangeText={(txt) => handleInputChange('description', txt)}
-/>
+        error={addEventErrors.description}
+        />
+                <FormTextInput
+        autoCapitalize='none'
+        placeholder='City'
+        value={inputs.city}
+        onChangeText={(txt) => handleInputChange('city', txt)}
+        error={addEventErrors.city}
+        />
 
+        <FormTextInput
+        autoCapitalize='none'
+        placeholder='Address'
+        value={inputs.address}
+        onChangeText={(txt) => handleInputChange('address', txt)}
+        error={addEventErrors.address}
+        />
       </Form>
-      <Button block onPress={pickImage}>
-          <Text>Select image</Text>
-        </Button>
-      <Button large icon style={styles.button} onPress={doAddEvent}>
+      <DateTimePickerModal
+        isVisible={isDatePickerVisible}
+        mode="datetime"
+        locale="en_GB"
+        onConfirm={handleConfirm}
+        onCancel={hideDatePicker}
+      />
+      <Button
+       large icon style={styles.button} 
+       disabled={
+        addEventErrors.title !== null ||
+        addEventErrors.description !== null ||
+        addEventErrors.address !== null ||
+        addEventErrors.city !== null ||
+        image === null ||
+        dateTime === null 
+       }
+       onPress={doAddEvent}>
             <Icon name='send'/>
-            <Text style={{color: '#fff', paddingRight: 15,}}>Add Event!</Text>
+            <Text style={{color: '#fff', paddingRight: 15,}}>Submit</Text>
        </Button>
+
     </Content>
   </Container>
 

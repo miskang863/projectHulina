@@ -21,14 +21,6 @@ const List = ({navigation}) => {
       </FlatList>
  )};
 
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#fff',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-// });
 
 List.propTypes = {
   navigation: PropTypes.object,

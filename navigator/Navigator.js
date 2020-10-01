@@ -20,9 +20,9 @@ const Navigator = () => {
 const TabScreen = () => {
   return (
     <Tab.Navigator>
-
-    <Tab.Screen name='Add Event' component={AddEvent} />
+      
     <Tab.Screen name='Home' component={Home} />
+    <Tab.Screen name='Add Event' component={AddEvent} />
     <Tab.Screen name='Profile' component={Profile} />
 
   </Tab.Navigator>

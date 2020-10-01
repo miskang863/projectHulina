@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import { StyleSheet, Text, Image } from 'react-native';
+import PropTypes from 'prop-types';
 import { StatusBar } from 'expo-status-bar';
 import { Container, Header, Content, Form, Button, Icon } from 'native-base';
 import FormTextInput from '../components/FormTextInput';
@@ -17,6 +18,7 @@ const AddEvent = ({navigation}) => {
     const { handleInputChange,  inputs } = useAddEventHooks();
 
 
+
    const doAddEvent = async () => {
 
     try {
@@ -31,15 +33,15 @@ const AddEvent = ({navigation}) => {
         type = 'image/jpeg';
       }
       formData.append('file', { uri: image, name: filename, type });
-      // kovakoodattu token itoistaiseksi
-      const userToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo2NDIsInVzZXJuYW1lIjoibWlza2FuZyIsImVtYWlsIjoibWlza2FuZ0BtZXRyb3BvbGlhLmZpIiwiZnVsbF9uYW1lIjpudWxsLCJpc19hZG1pbiI6bnVsbCwidGltZV9jcmVhdGVkIjoiMjAyMC0wOC0yOFQwOToxMzoyMi4wMDBaIiwiaWF0IjoxNTk4NjA4NzI4LCJleHAiOjE2MDA2ODIzMjh9.k1OeMvU4OmDUyUINkXXoRI6O0wI56bwhvH2NJ_nM4wY";
+      
+      // vaihda tähän oikea token, kun logini tehty
+      const userToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo4NDQsInVzZXJuYW1lIjoibWlza3Rlc3QiLCJlbWFpbCI6InRlc3RlckB0ZXN0ZWQuY29tIiwiZnVsbF9uYW1lIjpudWxsLCJpc19hZG1pbiI6bnVsbCwidGltZV9jcmVhdGVkIjoiMjAyMC0xMC0wMVQwNjo0Mjo0OC4wMDBaIiwiaWF0IjoxNjAxNTM0NTk5LCJleHAiOjE2MDM2MDgxOTl9.9XlU49WcZ6cSzkZxLV2fEQkv_pbo9wBCj0vgMLVI0oo";
       const resp = await postEvent(formData, userToken);
       console.log('upload', resp);
       
-      // wait 2s
-      // setTimeout(() => {
-      //   navigation.push('Home');
-      // }, 2000);
+       setTimeout(() => {
+        navigation.push('Home');
+       }, 2000);
     } catch (e) {
       console.log('upload error', e.message);
     } 
@@ -76,6 +78,7 @@ const AddEvent = ({navigation}) => {
           console.log(E);
         }
       };
+
     
 
   return (
@@ -103,6 +106,7 @@ const AddEvent = ({navigation}) => {
         value={inputs.description}
         onChangeText={(txt) => handleInputChange('description', txt)}
 />
+
       </Form>
       <Button block onPress={pickImage}>
           <Text>Select image</Text>
@@ -129,5 +133,9 @@ const styles = StyleSheet.create({
      alignSelf: 'center',
   },
 });
+
+AddEvent.propTypes = {
+  navigation: PropTypes.object,
+};
 
 export default AddEvent;

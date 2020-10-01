@@ -28,13 +28,13 @@ const loadEvent = async () => {
     return eventArray;
   };
 
-  const postEvent = async (fd, token) => {
+  const postEvent = async (formData, userToken) => {
     const options = {
       method: 'POST',
       headers: {
-        'x-access-token': token,
+        'x-access-token': userToken,
       },
-      data: fd,
+      data: formData,
       url: apiUrl + 'media',
     };
     try {
@@ -45,4 +45,25 @@ const loadEvent = async () => {
     }
     };
 
-export {useLoadEvent, postEvent,};
+
+    const checkToken = async (token) => {
+      const options = {
+        method: 'GET',
+        headers: {'x-access-token': token},
+      };
+      try {
+        const response = await fetch(apiUrl + 'users/user', options);
+        const userData = await response.json();
+        if (response.ok) {
+          console.log(userData);
+          return userData;
+        } else {
+          throw new Error(userData.message);
+        }
+      } catch (e) {
+        throw new Error(e.message);
+      }
+    };
+
+
+export {useLoadEvent, postEvent, checkToken,};

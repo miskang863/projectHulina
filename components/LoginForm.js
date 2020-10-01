@@ -28,7 +28,7 @@ const LoginForm = ({navigation}) => {
   const {handleInputChange, inputs} = useLoginForm();
 
   return (
-    <View>
+    <Form>
       <FormTextInput
         autoCapitalize="none"
         placeholder="username"
@@ -40,8 +40,10 @@ const LoginForm = ({navigation}) => {
         onChangeText={(txt) => handleInputChange('password', txt)}
         secureTextEntry={true}
       />
-      <Button title="Login!" onPress={doLogin}/>
-    </View>
+      <Button block onPress={doLogin}>
+        <Text>Login!</Text>
+      </Button>
+    </Form>
   );
 };
 

@@ -27,7 +27,7 @@ const StackScreen = () => {
       {isLoggedIn ? (
         <>
           <Stack.Screen name="Home" component={TabScreen} />
-          <Stack.Screen name="Single" component={Event} />
+          <Stack.Screen name="Event" component={Event} />
         </>
       ) : (
           <>

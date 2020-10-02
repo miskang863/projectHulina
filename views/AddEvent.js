@@ -130,9 +130,12 @@ const AddEvent = ({navigation}) => {
         }
 
       <Button block onPress={pickImage}>
+        <Icon name={'camera'}></Icon>
           <Text>Select image</Text>
         </Button>
        <Button block onPress={showDatePicker}>
+       <Icon name={'calendar'}></Icon>
+
          <Text>Select date and time</Text>
        </Button>
       <Form style={{padding: 15}}>

@@ -30,6 +30,25 @@ const loadEvent = async () => {
     return eventArray;
   };
 
+  const getComments = async (file_id) => {
+    const [commentArray, setCommentArray] = useState([]);
+    const loadComment = async () => {
+    try {
+      let response = await fetch( apiUrl + 'comments/file/' + file_id);
+      let json = await response.json();
+      let comment = Promise.all(json);
+     setCommentArray(comment);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  useEffect(() => {
+    loadComment();
+  }, []);
+  // console.log('comment array', commentArray)
+return commentArray;
+}
+
   const postEvent = async (formData, userToken) => {
     const options = {
       method: 'POST',
@@ -89,6 +108,30 @@ const loadEvent = async () => {
         throw new Error(e.message);
       }
     };
+
+    const postComment = async (comment, token) => {
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-access-token': token,
+        },
+        body: JSON.stringify(comment),
+      };
+      try {
+        const response = await fetch(apiUrl + 'comments', options);
+        const result = await response.json();
+        console.log('comment resp: ', result);
+        if (response.ok) {
+          return result;
+        } else {
+          throw new Error(result.message);
+        }
+      } catch (e) {
+        throw new Error(e.message);
+      }
+    };
+
     
     const postLogIn = async (userCreds) => {
       const options = {
@@ -131,4 +174,5 @@ const loadEvent = async () => {
 
 
 
-export {useLoadEvent, postEvent, checkToken, postTag, postLogIn, postRegistration,};
+export {useLoadEvent,postEvent, checkToken, postTag,
+        postLogIn, postRegistration, postComment, getComments, };

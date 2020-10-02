@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { StyleSheet, Text,  Image } from 'react-native';
-import {ListItem as CoolListItem, Thumbnail, Left, Body, Right, Button } from 'native-base';
+import {ListItem as CoolListItem, Thumbnail, Left, Body, Right, Button, Icon } from 'native-base';
 
 const apiUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
@@ -12,7 +12,7 @@ const ListItem = ({navigation, singleEvent}) => {
   const dateTime = allData.dateTime;
   const address = allData.address;
   const city = allData.city;
-  console.log(city);
+
 
   return (
 
@@ -27,7 +27,12 @@ const ListItem = ({navigation, singleEvent}) => {
 
           </Body>
           <Right>
-            <Button transparent>
+            <Button transparent  onPress={() => {
+            navigation.navigate('Event', {
+              file: singleEvent,
+            });
+          }}>
+            <Icon name={'eye'}></Icon>
               <Text>View</Text>
             </Button>
           </Right>

@@ -2,18 +2,17 @@ import { StatusBar } from 'expo-status-bar';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { StyleSheet, Text,  Image, View } from 'react-native';
-import List from '../components/List';
+import List from '../components/ComList';
 import {FlatList} from 'react-native-gesture-handler';
 import {Header} from 'native-base';
 
 
-const Home = ({navigation}) => {
+const Comments = ({navigation}) => {
   return (
     <View style={styles.container}>
 <Header>
-  <Text style={styles.headerText}>Helsingin Hulinat</Text>
+  <Text style={styles.headerText}>Comments</Text>
 </Header>
-<Text>Hot Right Now:</Text>
     <List navigation={navigation}/>
     <StatusBar style="dark"/>
   </View>
@@ -32,8 +31,8 @@ const styles = StyleSheet.create({
   }
 });
 
-Home.propTypes = {
+Comments.propTypes = {
   navigation: PropTypes.object,
 };
 
-export default Home;
+export default Comments;

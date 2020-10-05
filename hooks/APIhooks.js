@@ -30,7 +30,9 @@ const loadEvent = async () => {
     return eventArray;
   };
 
-  const getComments = async (file_id) => {
+
+   
+  const useLoadComments = async (file_id) => {
     const [commentArray, setCommentArray] = useState([]);
     const loadComment = async () => {
     try {
@@ -46,8 +48,10 @@ const loadEvent = async () => {
     loadComment();
   }, []);
   // console.log('comment array', commentArray)
+
 return commentArray;
-}
+};
+
 
   const postEvent = async (formData, userToken) => {
     const options = {
@@ -175,4 +179,4 @@ return commentArray;
 
 
 export {useLoadEvent,postEvent, checkToken, postTag,
-        postLogIn, postRegistration, postComment, getComments, };
+        postLogIn, postRegistration, postComment, useLoadComments, };

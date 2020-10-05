@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Image} from 'react-native';
+import {Image, FlatList} from 'react-native';
 import PropTypes from 'prop-types';
 import {
   Card,
@@ -17,9 +17,9 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 const apiUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
-const Event = ({route}) => {
+const Event = ({route, navigation}) => {
   // const [comment, setComment] = useState([{}]);
-  const [commentArray, setCommentArray] = useState([{}]);
+  const [commentArray, setCommentArray] = useState([]);
 
   const {file} = route.params;
   const allData = JSON.parse(file.description);
@@ -42,24 +42,16 @@ const Event = ({route}) => {
   } catch(e) {
     console.log('Comment error', e.message);
   }
-  };
-
-  
-
- // TÄMÄ TOIMII; KORJAA VIELÄ KUNTOON
-const funcker = async ()=> { 
-let array =  await getComments(file.file_id);
-console.log('TÄMÄ ON VITT UEVENTTET', array);
 };
-funcker();
-//   const fetchComment = async (file_id) => {
-//       setComment(await getComments(file_id));
-//       console.log(comment);
+// const testGet = async () => {
+//   const array  = await getComments(file.file_id);
+//   console.log(array);
 // };
 
-// useEffect(() => {
-//    fetchComment(file.file_id);
-// }, []);
+// testGet();
+
+
+
 
   return (
     <Container>
@@ -76,7 +68,7 @@ funcker();
 
           <CardItem  style={{flexDirection: 'row', justifyContent: 'space-evenly'}}>
          
-            <Button transparent onPress={doComment}>
+            <Button transparent onPress={() => {navigation.navigate('Comments')}}>
               <Icon name={'ios-mail'}></Icon>
             </Button>
          
@@ -99,11 +91,13 @@ funcker();
             </Text>
           </CardItem>
           <CardItem>
-            <Text>
-dfa            </Text>
+
           </CardItem>
         </Card>
+
       </Content>
+
+{/* <CommentList navigation={navigation}/>  */}
     </Container>
 
   );
@@ -111,6 +105,8 @@ dfa            </Text>
 
 Event.propTypes = {
   route: PropTypes.object,
+  navigation: PropTypes.object,
+  file: PropTypes.object,
 };
 
 export default Event;

@@ -7,6 +7,8 @@ import Profile from '../views/Profile';
 import AddEvent from '../views/AddEvent';
 import Event from '../views/Event';
 import Login from '../views/Login';
+import Comments from '../views/Comments';
+
 import {AuthContext} from '../contexts/AuthContext';
 
 const Tab = createBottomTabNavigator();
@@ -44,6 +46,8 @@ const StackScreen = () => {
           <Stack.Screen name="Event" component={Event} />
 
             <Stack.Screen name="Login" component={Login} />
+            <Stack.Screen name="Comments" component={Comments} />
+
      
    </Stack.Navigator>
   );

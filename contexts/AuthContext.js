@@ -9,7 +9,7 @@ const AuthProvider = ({children}) => {
   const [user, setUser] = useState({});
 
   return (
-    <AuthContext.Provider value={[isLoggedIn, setIsLoggedIn, user, setUser]}>
+    <AuthContext.Provider value={{isLoggedIn, setIsLoggedIn, user, setUser}}>
       {children}
     </AuthContext.Provider>
   );

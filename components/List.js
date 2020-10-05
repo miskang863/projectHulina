@@ -4,13 +4,11 @@ import {
 } from 'react-native';
 import ListItem from './ListItem';
 import PropTypes from 'prop-types';
-import {useLoadEvent} from '../hooks/APIhooks';
+import {getComments, useLoadEvent} from '../hooks/APIhooks';
 
 const List = ({navigation}) => {
       const eventArray = useLoadEvent();
-
-
-
+      // console.log('event array', eventArray);
   return (
 <FlatList
       data={eventArray}
@@ -21,9 +19,5 @@ const List = ({navigation}) => {
       </FlatList>
  )};
 
-
-List.propTypes = {
-  navigation: PropTypes.object,
-};
 
 export default List;

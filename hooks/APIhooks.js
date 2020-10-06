@@ -71,8 +71,28 @@ return commentArray;
     }
     };
 
+    const checkToken = async (token, id) => {
+      const options = {
+        method: 'GET',
+        headers: {'x-access-token': token},
+      };
+      try {
+        const response = await fetch(apiUrl + 'users/' + id, options);
+        const userData = await response.json();
+        if (response.ok) {
+          console.log(userData);
+          return userData;
+        } else {
+          throw new Error(userData.message);
+        }
+      } catch (e) {
+        throw new Error(e.message);
+      }
+    };
 
-    const checkToken = async (token) => {
+
+
+    const getUser = async (token) => {
       const options = {
         method: 'GET',
         headers: {'x-access-token': token},
@@ -179,4 +199,5 @@ return commentArray;
 
 
 export {useLoadEvent,postEvent, checkToken, postTag,
-        postLogIn, postRegistration, postComment, useLoadComments, };
+        postLogIn, postRegistration, postComment, 
+        useLoadComments, getUser };

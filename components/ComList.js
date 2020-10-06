@@ -32,10 +32,10 @@ setCommentArray2(jimbala);
 
   return (
 <FlatList
-      data={eventArray}
+      data={commentArray2}
       keyExtractor={(item, index) => index.toString()}
       renderItem={({item}) =>
-        <ListItem navigation={navigation} singleEvent={item} />
+        <ListItem navigation={navigation} singleComment={item} />
       }>
       </FlatList>
  )};

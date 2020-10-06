@@ -6,36 +6,21 @@ import {ListItem as CoolListItem, Thumbnail, Left, Body, Right, Button, Icon } f
 
 const apiUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
-const ListItem = ({navigation, singleEvent}) => {
-  const allData = JSON.parse(singleEvent.description);
-  const description = allData.description;
-  const dateTime = allData.dateTime;
-  const address = allData.address;
-  const city = allData.city;
+const ListItem = ({navigation, singleComment}) => {
+  // const allData = JSON.parse(singleEvent.description);
+  // const description = allData.description;
+  // const dateTime = allData.dateTime;
+  // const address = allData.address;
+  // const city = allData.city;
 
 
   return (
 
         <CoolListItem thumbnail>
-          <Left>
-            <Thumbnail square source={{ uri: apiUrl +  singleEvent.thumbnails.w160}} />
-          </Left>
           <Body>
-            <Text>{singleEvent.title}</Text>
-  <Text>{city}</Text>
-            <Text>{dateTime}</Text>
+            <Text>{singleComment.comment}</Text>
 
           </Body>
-          <Right>
-            <Button transparent  onPress={() => {
-            navigation.navigate('Event', {
-              file: singleEvent,
-            });
-          }}>
-            <Icon name={'eye'}></Icon>
-              <Text>View</Text>
-            </Button>
-          </Right>
         </CoolListItem>
  )};
 
@@ -50,7 +35,7 @@ const styles = StyleSheet.create({
 
 ListItem.propTypes = {
   navigation: PropTypes.object,
-  singleEvent: PropTypes.object,
+  singleComment: PropTypes.object,
 };
 
 export default ListItem;

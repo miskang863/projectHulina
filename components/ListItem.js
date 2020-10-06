@@ -22,7 +22,7 @@ const ListItem = ({navigation, singleEvent}) => {
           </Left>
           <Body>
             <Text>{singleEvent.title}</Text>
-  <Text>{city}</Text>
+            <Text>{city}</Text>
             <Text>{dateTime}</Text>
 
           </Body>

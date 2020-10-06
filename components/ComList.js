@@ -6,10 +6,10 @@ import ListItem from './ComListItem';
 import PropTypes from 'prop-types';
 import {useLoadComments, useLoadEvent} from '../hooks/APIhooks';
 
-const List =  ({navigation}) => {
+const List =  ({navigation, file}) => {
     const [commentArray2, setCommentArray2] = useState([]);
 
-        const eventArray = useLoadEvent();
+        // const eventArray = useLoadEvent();
       // console.log('event array', eventArray);
     //   const comArray =  useLoadComments(2827);
     //   console.log('comarray', comArray);
@@ -18,7 +18,7 @@ const List =  ({navigation}) => {
 
 
       const getComs = async () => {
-jimbala = await useLoadComments(2827);
+jimbala = await useLoadComments(file.file_id);
 setCommentArray2(jimbala);
         // console.log('comArray', comArray);
         // jimbala = await useLoadComments(2827);

@@ -114,9 +114,6 @@ const AddEvent = ({navigation}) => {
         }
       };
 
-    
-   
-
   return (
     <Container style={styles.container}>
     <Header><Text>Add Event</Text></Header>

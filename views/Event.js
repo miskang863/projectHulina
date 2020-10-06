@@ -18,7 +18,6 @@ import AsyncStorage from '@react-native-community/async-storage';
 const apiUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
 const Event = ({route, navigation}) => {
-  // const [comment, setComment] = useState([{}]);
   const [commentArray, setCommentArray] = useState([]);
 
   const {file} = route.params;
@@ -27,30 +26,6 @@ const Event = ({route, navigation}) => {
   const dateTime = allData.dateTime;
   const address = allData.address;
   const city = allData.city;
-
-
-  const doComment = async () => {
-  try{
-    const userToken = await AsyncStorage.getItem('userToken');
-   await postComment(
-    {
-      file_id: file.file_id,
-      comment: 'Tosi hieno Commentti :D',
-    },
-    userToken
-  );
-  } catch(e) {
-    console.log('Comment error', e.message);
-  }
-};
-// const testGet = async () => {
-//   const array  = await getComments(file.file_id);
-//   console.log(array);
-// };
-
-// testGet();
-
-
 
 
   return (
@@ -68,11 +43,11 @@ const Event = ({route, navigation}) => {
 
           <CardItem  style={{flexDirection: 'row', justifyContent: 'space-evenly'}}>
          
-            <Button transparent onPress={() => {navigation.navigate('Comments')}}>
+            <Button transparent onPress={() => {navigation.navigate('Comments', {file: file})}}>
               <Icon name={'ios-mail'}></Icon>
             </Button>
          
-            <Button transparent onPress={doComment}>
+            <Button transparent onPress={() => {navigation.navigate('Comments')}}>
               <Icon name={'heart'}></Icon>
             </Button>
             <Button transparent>
@@ -96,8 +71,6 @@ const Event = ({route, navigation}) => {
         </Card>
 
       </Content>
-
-{/* <CommentList navigation={navigation}/>  */}
     </Container>
 
   );

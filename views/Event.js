@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Image, FlatList} from 'react-native';
 import PropTypes from 'prop-types';
 import {
@@ -14,11 +14,13 @@ import {
 } from 'native-base';
 import {getComments, postComment, } from '../hooks/APIhooks';
 import AsyncStorage from '@react-native-community/async-storage';
+import {AuthContext} from '../contexts/AuthContext';
 
 const apiUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
 const Event = ({route, navigation}) => {
   const [commentArray, setCommentArray] = useState([]);
+  const { isLoggedIn } = useContext(AuthContext);
 
   const {file} = route.params;
   const allData = JSON.parse(file.description);
@@ -40,9 +42,10 @@ const Event = ({route, navigation}) => {
               style={{height: 400, width: null, flex: 1}}
             />
           </CardItem>
-
           <CardItem  style={{flexDirection: 'row', justifyContent: 'space-evenly'}}>
-         
+       
+          {isLoggedIn ? (
+            <>
             <Button transparent onPress={() => {navigation.navigate('Comments', {file: file})}}>
               <Icon name={'ios-mail'}></Icon>
             </Button>
@@ -53,6 +56,8 @@ const Event = ({route, navigation}) => {
             <Button transparent>
               <Icon name={'ios-compass'}></Icon>
             </Button>
+          </>) : (<>
+      </>)}
           </CardItem>
           <CardItem style={{flexDirection: 'column', alignItems: 'flex-start'}}>
             <Text>

@@ -6,7 +6,7 @@ import {
   ListItem as CoolListItem,
   Body,
 } from 'native-base';
-import { getUser } from '../hooks/APIhooks';
+import { getUser, getUserForComs } from '../hooks/APIhooks';
 import AsyncStorage from '@react-native-community/async-storage';
 
 const ListItem = ({ navigation, singleComment }) => {
@@ -15,7 +15,7 @@ const ListItem = ({ navigation, singleComment }) => {
   const userData = async () => { //Get the username of commenter
     try {
       const userToken = await AsyncStorage.getItem('userToken');
-      const user = await getUser(userToken, singleComment.user_id);
+      const user = await getUserForComs(userToken, singleComment.user_id);
       setUserObj(user);
     } catch (e) {
       console.log('userData error', e.message);

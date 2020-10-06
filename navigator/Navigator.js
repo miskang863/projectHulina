@@ -23,27 +23,47 @@ const Navigator = () => {
 };
 
 const TabScreen = () => {
+  const { isLoggedIn } = useContext(AuthContext);
+
   return (
     <Tab.Navigator>
-      <Tab.Screen name='Home' component={Home} />
-      <Tab.Screen name='Add Event' component={AddEvent} />
-      <Tab.Screen name='Profile' component={Profile} />
-      <Tab.Screen name='Login' component={Login} />
-      <Tab.Screen name='HelEvent' component={HelEvent} />
+      {isLoggedIn ? (
+        <>
+          <Tab.Screen name='Home' component={Home} />
+          <Tab.Screen name='Add Event' component={AddEvent} />
+          <Tab.Screen name='Profile' component={Profile} />
+          <Tab.Screen name='HelEvent' component={HelEvent} />
+        </>
+      ) : (
+        <>
+          <Tab.Screen name='Home' component={Home} />
+          <Tab.Screen name='HelEvent' component={HelEvent} />
+          <Tab.Screen name='Login' component={Login} />
+        </>
+      )}
     </Tab.Navigator>
   );
 };
 
 const StackScreen = () => {
-    const {isLoggedIn} = useContext(AuthContext);
+  const { isLoggedIn } = useContext(AuthContext);
   return (
     <Stack.Navigator>
-      <Stack.Screen name='Home' component={TabScreen} />
-      <Stack.Screen name="HelEvent" component={TabScreen} />
-      <Stack.Screen name='Event' component={Event} />
-
-      <Stack.Screen name='Login' component={Login} />
-      <Stack.Screen name='Comments' component={Comments} />
+      {isLoggedIn ? (
+        <>
+          <Stack.Screen name='Home' component={TabScreen} />
+          <Stack.Screen name='HelEvent' component={TabScreen} />
+          <Stack.Screen name='Event' component={Event} />
+          <Stack.Screen name='Comments' component={Comments} />
+        </>
+      ) : (
+        <>
+          <Stack.Screen name='Home' component={TabScreen} />
+          <Stack.Screen name='HelEvent' component={TabScreen} />
+          <Stack.Screen name='Event' component={Event} />
+          <Stack.Screen name='Login' component={Login} />
+        </>
+      )}
     </Stack.Navigator>
   );
 };

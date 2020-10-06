@@ -18,7 +18,7 @@ import {getAvatar} from '../hooks/APIhooks';
 const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
 const Profile = ({navigation}) => {
-  const {setIsLoggedIn, user} = useContext(AuthContext);
+  const {setIsLoggedIn, user, isLoggedIn} = useContext(AuthContext);
   const [avatar, setAvatar] = useState([{filename: ''}]);
 
   const fetchAvatar = async () => {
@@ -29,7 +29,7 @@ const Profile = ({navigation}) => {
     fetchAvatar();
   }, []);
 
-  // console.log('Profile.js', avatar[0].filename);
+  console.log('Profile.js logged in', isLoggedIn);
 
   console.log('logged in user data:', user);
   const logout = async () => {

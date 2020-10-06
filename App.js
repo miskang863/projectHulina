@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import Navigator from './navigator/Navigator';
 import {AuthProvider} from './contexts/AuthContext';
 import * as Expo from 'expo';

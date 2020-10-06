@@ -10,9 +10,6 @@ import useAddEventForm from '../hooks/AddEventHooks';
 import {postEvent, postTag} from '../hooks/APIhooks';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import AsyncStorage from '@react-native-community/async-storage';
-// import AsyncStorage from '@react-native-community/async-storage';
-
-
 
 const AddEvent = ({navigation}) => {
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false); 
@@ -21,7 +18,7 @@ const AddEvent = ({navigation}) => {
     const [fileType, setFileType] = useState('image');
     const { handleInputChange,  inputs, addEventErrors } = useAddEventForm();
 
-  
+  //DateTime Handler
     const showDatePicker = () => {
       setDatePickerVisibility(true);
     };
@@ -38,7 +35,6 @@ const AddEvent = ({navigation}) => {
     };
 
    const doAddEvent = async () => {
-
     try {
       const userToken = await AsyncStorage.getItem('userToken');
       const formData = new FormData();
@@ -60,8 +56,6 @@ const AddEvent = ({navigation}) => {
       }
       formData.append('file', { uri: image, name: filename, type });
       
-      // vaihda tähän oikea token, kun logini tehty
-      // const userToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo4NDQsInVzZXJuYW1lIjoibWlza3Rlc3QiLCJlbWFpbCI6InRlc3RlckB0ZXN0ZWQuY29tIiwiZnVsbF9uYW1lIjpudWxsLCJpc19hZG1pbiI6bnVsbCwidGltZV9jcmVhdGVkIjoiMjAyMC0xMC0wMVQwNjo0Mjo0OC4wMDBaIiwiaWF0IjoxNjAxNTM0NTk5LCJleHAiOjE2MDM2MDgxOTl9.9XlU49WcZ6cSzkZxLV2fEQkv_pbo9wBCj0vgMLVI0oo";
       const resp = await postEvent(formData, userToken);
       console.log('upload', resp);
 
@@ -82,7 +76,7 @@ const AddEvent = ({navigation}) => {
     } 
     };
 
-    const getPermissionAsync = async () => {
+    const getPermissionAsync = async () => { //Get permissions
         if (Platform.OS !== 'web') {
           const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
           if (status !== 'granted') {
@@ -95,7 +89,7 @@ const AddEvent = ({navigation}) => {
       });
     
 
-    const pickImage = async () => {
+    const pickImage = async () => {  //Image picker
         try {
           const result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All,

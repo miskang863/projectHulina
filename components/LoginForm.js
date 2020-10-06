@@ -10,7 +10,6 @@ import { Form, Button, Text } from 'native-base';
 const LoginForm = ({navigation}) => {
   //tämä on rikki
   const {setIsLoggedIn}  = useContext(AuthContext);
-  // const {setIsLoggedIn} = useContext(AuthContext);
   const {handleInputChange, inputs} = useLoginForm();
   const doLogin = async () => {
     
@@ -22,7 +21,7 @@ const LoginForm = ({navigation}) => {
     } catch (e) {
       console.log('login error', e.message);
     }
-    // navigation.navigate('Home');
+     navigation.navigate('Home');
   };
 
 

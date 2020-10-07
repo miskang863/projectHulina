@@ -33,8 +33,10 @@ const Home = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-
-      <Text>Hot Right Now:</Text>
+            <Header>
+                <Text style={styles.headerText}>Private Events</Text>
+            </Header>     
+       <Text>Hot Right Now:</Text>
       <List navigation={navigation} />
       <StatusBar style='dark' />
     </View>

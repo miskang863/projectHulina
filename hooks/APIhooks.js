@@ -8,7 +8,7 @@ const useLoadEvent = () => {
 
   const loadEvent = async () => {
     try {
-      const response = await fetch(apiUrl + 'tags/' + 'helsinginhulinat9999');
+      const response = await fetch(apiUrl + 'tags/' + 'helsinginhulinat666');
       const json = await response.json();
       let event = await Promise.all(
         json.map(async (item) => {

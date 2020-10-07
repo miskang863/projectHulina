@@ -135,14 +135,14 @@ const Event = ({ route, navigation }) => {
             }}
           >
             <Text style={{ color: '#ffffff' }}>
+              {'Information: ' + description}
+            </Text>
+            <Text style={{ color: '#ffffff' }}>
               {'Address: ' + address + ', ' + city}
             </Text>
             <Text style={{ color: '#ffffff' }}>
               {'Date and time: ' +
                 moment(dateTime).format('MMMM Do YYYY, HH:mm')}
-            </Text>
-            <Text style={{ color: '#ffffff' }}>
-              {'Information: ' + description}
             </Text>
           </CardItem>
         </Card>

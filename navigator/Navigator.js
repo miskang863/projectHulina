@@ -30,9 +30,9 @@ const TabScreen = () => {
       {isLoggedIn ? (
         <>
           <Tab.Screen name='Home' component={Home} />
+          <Tab.Screen name='HelEvent' component={HelEvent} />
           <Tab.Screen name='Add Event' component={AddEvent} />
           <Tab.Screen name='Profile' component={Profile} />
-          <Tab.Screen name='HelEvent' component={HelEvent} />
         </>
       ) : (
         <>
@@ -57,7 +57,7 @@ const StackScreen = () => {
               backgroundColor: '#445963',
             },
             headerTintColor: '#fff',
-            title: 'Events',    
+            title: 'Helsingin Hulinat',    
           }}/>
           <Stack.Screen name='HelEvent' component={TabScreen} />
           <Stack.Screen name='Event' component={Event} 
@@ -80,9 +80,23 @@ const StackScreen = () => {
         </>
       ) : (
         <>
-          <Stack.Screen name='Home' component={TabScreen} />
+          <Stack.Screen name='Home' component={TabScreen} 
+          options={{
+            headerStyle: {
+              backgroundColor: '#445963',
+            },
+            headerTintColor: '#fff',
+            title: 'Helsingin Hulinat',    
+          }}/>
           <Stack.Screen name='HelEvent' component={TabScreen} />
-          <Stack.Screen name='Event' component={Event} />
+          <Stack.Screen name='Event' component={Event} 
+                  options={{
+                    headerStyle: {
+                      backgroundColor: '#445963',
+                    },
+                    headerTintColor: '#fff',
+            
+                  }}/>
           <Stack.Screen name='Login' component={Login} />
         </>
       )}

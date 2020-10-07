@@ -66,7 +66,7 @@ const AddEvent = ({ navigation }) => {
       const postTagResponse = await postTag(
         {
           file_id: resp.file_id,
-          tag: 'helsinginhulinat9999',
+          tag: 'helsinginhulinat666',
         },
         userToken
       );

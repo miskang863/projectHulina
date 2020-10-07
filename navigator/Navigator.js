@@ -51,10 +51,32 @@ const StackScreen = () => {
     <Stack.Navigator>
       {isLoggedIn ? (
         <>
-          <Stack.Screen name='Home' component={TabScreen} />
+          <Stack.Screen name='Home' component={TabScreen} 
+          options={{
+            headerStyle: {
+              backgroundColor: '#445963',
+            },
+            headerTintColor: '#fff',
+            title: 'Events',    
+          }}/>
           <Stack.Screen name='HelEvent' component={TabScreen} />
-          <Stack.Screen name='Event' component={Event} />
-          <Stack.Screen name='Comments' component={Comments} />
+          <Stack.Screen name='Event' component={Event} 
+                  options={{
+                    headerStyle: {
+                      backgroundColor: '#445963',
+                    },
+                    headerTintColor: '#fff',
+            
+                  }}/>
+          <Stack.Screen name='Comments' component={Comments}
+          options={{
+                    headerStyle: {
+                      backgroundColor: '#140078',
+                    },
+                    headerTintColor: '#fff',
+            
+                  }}
+           />
         </>
       ) : (
         <>

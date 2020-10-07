@@ -31,10 +31,10 @@ const ListItem = ({ navigation, singleComment }) => {
   const dateFormatted = euroDate + ' ' + aika.toLocaleTimeString();
 
   return (
-    <CoolListItem thumbnail>
-      <Body>
-        <Text>{dateFormatted}</Text>
-        <Text>
+    <CoolListItem noBorder thumbnail>
+      <Body >
+        <Text style={{color: 'white'}}>{dateFormatted}</Text>
+        <Text style={{color: 'white'}}>
           {userObj.username}: {singleComment.comment}
         </Text>
       </Body>

@@ -1,7 +1,7 @@
-import { StatusBar } from 'expo-status-bar';
+
 import PropTypes from 'prop-types';
 import React, { Component, useContext, useEffect } from 'react';
-import { StyleSheet, Text, Image, View } from 'react-native';
+import { StyleSheet, Text, Image, View, StatusBar } from 'react-native';
 import List from '../components/List';
 import { FlatList } from 'react-native-gesture-handler';
 import { Header } from 'native-base';
@@ -33,9 +33,7 @@ const Home = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Header>
-        <Text style={styles.headerText}>Helsingin Hulinat</Text>
-      </Header>
+
       <Text>Hot Right Now:</Text>
       <List navigation={navigation} />
       <StatusBar style='dark' />

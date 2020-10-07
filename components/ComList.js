@@ -16,11 +16,11 @@ const List = ({ navigation, file }) => {
   getComs();
 
   return (
-    <FlatList
+    <FlatList  
       data={commentArray}
       keyExtractor={(item, index) => index.toString()}
       renderItem={({ item }) => (
-        <ListItem navigation={navigation} singleComment={item} />
+        <ListItem  navigation={navigation} singleComment={item} />
       )}
     ></FlatList>
   );

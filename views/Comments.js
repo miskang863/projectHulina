@@ -1,7 +1,7 @@
-import { StatusBar } from 'expo-status-bar';
+
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { StyleSheet, Text, Image, View } from 'react-native';
+import { StyleSheet, Text, Image, View, StatusBar } from 'react-native';
 import List from '../components/ComList';
 import { FlatList } from 'react-native-gesture-handler';
 import { Button, Form, Header, Icon } from 'native-base';
@@ -31,12 +31,9 @@ const Comments = ({ navigation, route }) => {
 
   return (
     <View style={styles.container}>
-      <Header>
-        <Text style={styles.headerText}>Comments</Text>
-      </Header>
-      <List navigation={navigation} file={file} />
-      <StatusBar style='dark' />
-      <Form style={{ padding: 15 }}>
+      <List  navigation={navigation} file={file} />
+      <StatusBar backgroundColor='#140078' barStyle='light-content' />
+      <Form style={{  }}>
         <FormTextInput
           autoCapitalize='none'
           placeholder='Write comment'
@@ -53,7 +50,7 @@ const Comments = ({ navigation, route }) => {
         onPress={doAddComment}
       >
         <Icon name='send' />
-        <Text style={{ color: '#fff', paddingRight: 15 }}>Submit</Text>
+        <Text style={{ color: '#ffffff', paddingRight: 15 }}>Submit</Text>
       </Button>
     </View>
   );
@@ -61,17 +58,14 @@ const Comments = ({ navigation, route }) => {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 20,
-    backgroundColor: '#fff',
+    
+    backgroundColor: '#512ca8',
     //  paddingHorizontal: 5,
     flex: 1,
   },
-  headerText: {
-    color: '#fff',
-    paddingTop: 20,
-    fontSize: 18,
+  button: {
+    padding: 10,
   },
-  button: {},
 });
 
 Comments.propTypes = {

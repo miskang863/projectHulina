@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, Image, View } from 'react-native';
 import PropTypes from 'prop-types';
 import { StatusBar } from 'expo-status-bar';
-import { Container, Header, Content, Form, Button, Icon } from 'native-base';
+import { Container, Header, Content, Form, Button, Icon, Spinner } from 'native-base';
 import FormTextInput from '../components/FormTextInput';
 import * as Permissions from 'expo-permissions';
 import * as ImagePicker from 'expo-image-picker';
@@ -10,6 +10,7 @@ import useAddEventForm from '../hooks/AddEventHooks';
 import { postEvent, postTag } from '../hooks/APIhooks';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import AsyncStorage from '@react-native-community/async-storage';
+import {Video} from 'expo-av';
 
 const AddEvent = ({ navigation }) => {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
@@ -17,6 +18,7 @@ const AddEvent = ({ navigation }) => {
   const [image, setImage] = useState(null);
   const [fileType, setFileType] = useState('image');
   const { handleInputChange, inputs, addEventErrors } = useAddEventForm();
+  const [isLoading, setIsLoading] = useState(false);
 
   //DateTime Handler
   const showDatePicker = () => {
@@ -28,14 +30,15 @@ const AddEvent = ({ navigation }) => {
   };
 
   const handleConfirm = (date) => {
-    const euroDate =
-      date.getDate() + '.' + date.getMonth() + '.' + date.getFullYear();
-    const dateFormatted = euroDate + ' ' + date.toLocaleTimeString();
-    setDateTime(dateFormatted);
+    // const euroDate =
+    //   date.getDate() + '.' + date.getMonth() + '.' + date.getFullYear();
+    // const dateFormatted = euroDate + ' ' + date.toLocaleTimeString();
+    setDateTime(date);
     hideDatePicker();
   };
 
   const doAddEvent = async () => {
+    setIsLoading(true);
     try {
       const userToken = await AsyncStorage.getItem('userToken');
       const formData = new FormData();
@@ -71,9 +74,11 @@ const AddEvent = ({ navigation }) => {
 
       setTimeout(() => {
         navigation.replace('Home');
+        setIsLoading(false);
       }, 2000);
     } catch (e) {
       console.log('upload error', e.message);
+      setIsLoading(false);
     }
   };
 
@@ -117,10 +122,20 @@ const AddEvent = ({ navigation }) => {
       </Header>
       <Content style={{ padding: 5 }}>
         {image && (
-          <Image
-            source={{ uri: image }}
-            style={{ width: null, height: 200, flex: 1 }}
-          />
+          <>
+            {fileType == 'image' ? (
+              <Image
+                source={{ uri: image }}
+                style={{ width: null, height: 200, flex: 1 }}
+              />
+            ) : (
+              <Video
+                source={{ uri: image }}
+                style={{ height: 400, width: null, flex: 1 }}
+                useNativeControls={true}
+              />
+            )}
+          </>
         )}
 
         <Button block onPress={pickImage}>
@@ -170,6 +185,7 @@ const AddEvent = ({ navigation }) => {
           onConfirm={handleConfirm}
           onCancel={hideDatePicker}
         />
+          {isLoading && <Spinner color='blue'/>}
         <Button
           large
           icon

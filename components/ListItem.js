@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { StyleSheet, Text,  Image } from 'react-native';
 import {ListItem as CoolListItem, Thumbnail, Left, Body, Right, Button, Icon } from 'native-base';
+import moment from "moment";
+
 
 const apiUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
@@ -13,7 +15,6 @@ const ListItem = ({navigation, singleEvent}) => {
   const address = allData.address;
   const city = allData.city;
 
-
   return (
 
         <CoolListItem thumbnail>
@@ -23,7 +24,7 @@ const ListItem = ({navigation, singleEvent}) => {
           <Body>
             <Text>{singleEvent.title}</Text>
             <Text>{city}</Text>
-            <Text>{dateTime}</Text>
+            <Text>{moment(dateTime).format('MMMM Do YYYY, HH:mm')}</Text>   
 
           </Body>
           <Right>

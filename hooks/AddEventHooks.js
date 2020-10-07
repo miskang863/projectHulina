@@ -17,8 +17,8 @@ const constraints = {
       message: 'Cannot be empty.',
     },
     length: {
-      minimum: 5,
-      message: 'needs to be at least 5 characters.',
+      minimum: 4,
+      message: 'needs to be at least 4 characters.',
     },
   },
   address: {
@@ -26,8 +26,8 @@ const constraints = {
       message: 'Cannot be empty.',
     },
     length: {
-      minimum: 4,
-      message: 'needs to be at least 2 characters.',
+      minimum: 3,
+      message: 'needs to be at least 3 characters.',
     },
   },
   city: {

@@ -36,8 +36,6 @@ const ListHel = ({ navigation }) => {
         };
         helEvents.push(event);
       }
-
-      console.log(helEvents);
       setEventsHel(helEvents);
     } catch (e) {
       console.error(e);
@@ -46,7 +44,6 @@ const ListHel = ({ navigation }) => {
   useEffect(() => {
     loadEvent();
   }, []);
-  console.log('here', eventsHel);
 
   return (
     <FlatList

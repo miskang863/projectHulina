@@ -11,6 +11,7 @@ import {
   Button,
   Icon,
 } from 'native-base';
+import moment from "moment";
 
 const ListItem = ({ navigation, singleEvent }) => {
   return (
@@ -25,8 +26,8 @@ const ListItem = ({ navigation, singleEvent }) => {
       <Body>
         <Text>{singleEvent.name}</Text>
         <Text>{singleEvent.city}</Text>
-        <Text>{singleEvent.datetime}</Text>
-      </Body>
+        <Text>{moment(singleEvent.datetime).format('MMMM Do YYYY, HH:mm')}</Text>   
+           </Body>
     </CoolListItem>
   );
 };

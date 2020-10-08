@@ -41,9 +41,9 @@ const ListItem = ({ navigation, singleEvent }) => {
             });
           }}
         >
-          <Icon name={'eye'}></Icon>
-          <Text>View</Text>
-        </Button>
+          <Icon style={styles.icon} name={'eye'}></Icon>
+          <Text style={{color: "white"}}>View</Text>
+          </Button>
       </Right>
     </CoolListItem>
   );
@@ -56,6 +56,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  icon: {
+    color: "white",
+  }
 });
 
 ListItem.propTypes = {

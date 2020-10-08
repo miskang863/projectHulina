@@ -41,13 +41,13 @@ const TabScreen = () => {
               tabBarIcon: ({ color, size }) => <Icon name='home'></Icon>,
             }}
           />
-            <Tab.Screen
-              name='Public Events'
-              component={HelEvent}
-              options={{
-                tabBarIcon: ({ color, size }) => <Icon name='event'></Icon>,
-              }}
-            />
+          <Tab.Screen
+            name='Public Events'
+            component={HelEvent}
+            options={{
+              tabBarIcon: ({ color, size }) => <Icon name='event'></Icon>,
+            }}
+          />
           <Tab.Screen
             name='Add Event'
             component={AddEvent}
@@ -141,6 +141,13 @@ const StackScreen = () => {
                 backgroundColor: '#445963',
               },
               headerTintColor: '#fff',
+            }}
+          />
+          <Stack.Screen
+            name='Profile'
+            component={Profile}
+            options={{
+              tabBarIcon: ({ color, size }) => <Icon name='face'></Icon>,
             }}
           />
 

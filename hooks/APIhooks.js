@@ -209,9 +209,9 @@ const postRegistration = async (newUser) => {
   }
 };
 
-const getAvatar = async () => {
+const getAvatar = async (id) => {
   try {
-    const response = await fetch(apiUrl + 'tags/avatar_772');
+    const response = await fetch(apiUrl + 'tags/avatar_' + id);
     const avatarImages = await response.json();
     if (response.ok) {
       return avatarImages;

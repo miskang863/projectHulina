@@ -2,12 +2,14 @@ import PropTypes from 'prop-types';
 import React, { Component, useContext, useEffect } from 'react';
 import { StyleSheet, Text, Image, View, StatusBar } from 'react-native';
 import List from '../components/List';
+import { FlatList } from 'react-native-gesture-handler';
 import { Header } from 'native-base';
 import { AuthContext } from '../contexts/AuthContext';
 import AsyncStorage from '@react-native-community/async-storage';
 import { checkToken } from '../hooks/APIhooks';
 
 const Home = ({ navigation }) => {
+
   const { setIsLoggedIn, setUser, user } = useContext(AuthContext);
 
   const getToken = async () => {
@@ -30,10 +32,7 @@ const Home = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Header>
-        <Text style={styles.headerText}>Private Events</Text>
-      </Header>
-      <Text>Hot Right Now:</Text>
+      <Text style={styles.text}>Hot Right Now:</Text>
       <List navigation={navigation} />
       <StatusBar style='dark' />
     </View>
@@ -42,15 +41,19 @@ const Home = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 20,
-    backgroundColor: 'grey',
+    paddingTop: 10,
+    backgroundColor: '#283593',
     paddingBottom: 60,
+  
   },
-  headerText: {
-    color: '#fff',
-    paddingTop: 20,
+  text: {
     fontSize: 18,
-  },
+    textAlign: "center",
+    color: "white",
+    
+
+  }
+
 });
 
 Home.propTypes = {

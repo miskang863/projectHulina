@@ -1,16 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, Image, View } from 'react-native';
+import React, { Children, useEffect, useState } from 'react';
+import { ImageBackground, StyleSheet, Text, Image, View } from 'react-native';
 import PropTypes from 'prop-types';
 import { StatusBar } from 'expo-status-bar';
-import {
-  Container,
-  Header,
-  Content,
-  Form,
-  Button,
-  Icon,
-  Spinner,
-} from 'native-base';
+import { Container, Header, Content, Form, Button, Icon, Spinner } from 'native-base';
 import FormTextInput from '../components/FormTextInput';
 import * as Permissions from 'expo-permissions';
 import * as ImagePicker from 'expo-image-picker';
@@ -19,6 +11,7 @@ import { postEvent, postTag } from '../hooks/APIhooks';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import AsyncStorage from '@react-native-community/async-storage';
 import { Video } from 'expo-av';
+import { contains } from 'validate.js';
 
 const AddEvent = ({ navigation }) => {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
@@ -71,7 +64,7 @@ const AddEvent = ({ navigation }) => {
       const postTagResponse = await postTag(
         {
           file_id: resp.file_id,
-          tag: 'helsinginhulinat666',
+          tag: 'helsinginhulinat9999',
         },
         userToken
       );
@@ -120,12 +113,11 @@ const AddEvent = ({ navigation }) => {
     }
   };
 
+
   return (
     <Container style={styles.container}>
-      <Header>
-        <Text>Add Event</Text>
-      </Header>
-      <Content style={{ padding: 5 }}>
+      <Text style={{ color: '#fff', fontSize: 18, textAlign: "center", paddingBottom: 20 }}>Please, add your event</Text>
+      <Content style={{ padding: 20 }}>
         {image && (
           <>
             {fileType == 'image' ? (
@@ -134,32 +126,30 @@ const AddEvent = ({ navigation }) => {
                 style={{ width: null, height: 200, flex: 1 }}
               />
             ) : (
-              <Video
-                source={{ uri: image }}
-                style={{ height: 400, width: null, flex: 1 }}
-                useNativeControls={true}
-              />
-            )}
+                <Video
+                  source={{ uri: image }}
+                  style={{ height: 400, width: null, flex: 1 }}
+                  useNativeControls={true}
+                />
+              )}
           </>
         )}
-        <View style={{ flexDirection: 'column' }}>
-          <View>
-            <Button block style={{ flex:1 , marginBottom:10 }} onPress={pickImage}>
-              <Icon name={'camera'}></Icon>
-              <Text>Select image</Text>
-            </Button>
-          </View>
-          <View>
-            <Button block style={{ flex:1 ,  }} onPress={showDatePicker}>
-              <Icon name={'calendar'}></Icon>
-              <Text>Select date and time</Text>
-            </Button>
-          </View>
-        </View>
-        <Form style={{ padding: 15 }}>
+
+        <Button block style={{ flex: 1, marginBottom: 20 }} onPress={pickImage}>
+          <Icon name={'camera'}></Icon>
+          <Text style={{ color: '#fff', }}>Select image</Text>
+        </Button>
+
+        <Button block onPress={showDatePicker}>
+          <Icon name={'calendar'}></Icon>
+
+          <Text style={{ color: '#fff' }}>Select date and time</Text>
+        </Button>
+        <Form style={styles.form}>
           <FormTextInput
             autoCapitalize='none'
             placeholder='Event name'
+            placeholderTextColor= "#fff"
             value={inputs.title}
             onChangeText={(txt) => handleInputChange('title', txt)}
             error={addEventErrors.title}
@@ -167,6 +157,7 @@ const AddEvent = ({ navigation }) => {
           <FormTextInput
             autoCapitalize='none'
             placeholder='Description'
+            placeholderTextColor= "#fff"
             value={inputs.description}
             onChangeText={(txt) => handleInputChange('description', txt)}
             error={addEventErrors.description}
@@ -174,14 +165,16 @@ const AddEvent = ({ navigation }) => {
           <FormTextInput
             autoCapitalize='none'
             placeholder='City'
+            placeholderTextColor= "#fff"
             value={inputs.city}
             onChangeText={(txt) => handleInputChange('city', txt)}
             error={addEventErrors.city}
           />
 
-          <FormTextInput
+          <FormTextInput style={styles.formInput}
             autoCapitalize='none'
             placeholder='Address'
+            placeholderTextColor= "#fff"
             value={inputs.address}
             onChangeText={(txt) => handleInputChange('address', txt)}
             error={addEventErrors.address}
@@ -199,33 +192,57 @@ const AddEvent = ({ navigation }) => {
           large
           icon
           style={styles.button}
-          disabled={
-            addEventErrors.title !== null ||
-            addEventErrors.description !== null ||
-            addEventErrors.address !== null ||
-            addEventErrors.city !== null ||
-            image === null ||
-            dateTime === null
-          }
+          disabled={  image === null }
           onPress={doAddEvent}
         >
           <Icon name='send' />
           <Text style={{ color: '#fff', paddingRight: 15 }}>Submit</Text>
         </Button>
       </Content>
+
     </Container>
   );
-};
+}
+
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#283593',
+    justifyContent: "center",
     paddingTop: 40,
   },
+
+  ImageBackground: {
+    flex: 1,
+    resizeMode: "cover",
+    justifyContent: "center",
+  },
+
+  text: {
+    fontSize: 18,
+    textAlign: "center",
+    paddingVertical: 15,
+    color: '#fff',
+
+  },
+
   button: {
     alignSelf: 'center',
+    backgroundColor: '#78909C',
+    paddingTop: 10,
+
   },
+
+  formInput: {
+    flex: 1,
+    color: '#fff',
+    paddingTop: 15,
+    paddingBottom: 15,
+
+  },
+
+
 });
 
 AddEvent.propTypes = {

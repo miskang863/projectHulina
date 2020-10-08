@@ -9,19 +9,21 @@ import {
   Content,
   Container,
   Button,
-  Header,
+   View,
 } from 'native-base';
-import AsyncStorage from '@react-native-community/async-storage';
 import { AuthContext } from '../contexts/AuthContext';
 import { Video } from 'expo-av';
 import * as ScreenOrientation from 'expo-screen-orientation';
 import moment from 'moment';
+import {getUserForComs} from '../hooks/APIhooks';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const apiUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
 const Event = ({ route, navigation }) => {
   const { isLoggedIn } = useContext(AuthContext);
   const [videoRef, setVideoRef] = useState(null);
+  const [userObj, setUserObj] = useState({});
 
   const { file } = route.params;
   const allData = JSON.parse(file.description);
@@ -29,6 +31,22 @@ const Event = ({ route, navigation }) => {
   const dateTime = allData.dateTime;
   const address = allData.address;
   const city = allData.city;
+
+
+  const userData = async () => {
+    //Get the username of event organizer
+    try {
+      const userToken = await AsyncStorage.getItem('userToken');
+      const user = await getUserForComs(userToken, file.user_id);
+      setUserObj(user);
+    } catch (e) {
+      console.log('userData error', e.message);
+    }
+  };
+  useEffect(() => {
+    userData();
+  }, []);
+
 
   const handleVideoRef = (component) => {
     setVideoRef(component);
@@ -73,8 +91,17 @@ const Event = ({ route, navigation }) => {
         <StatusBar backgroundColor='#140078' barStyle='light-content' />
         <Card transparent style={styles.card}>
           <CardItem header style={styles.header}>
-            <Text style={{ color: '#ffffff', fontSize: 25, fontWeight: 'bold' }}>{file.title}</Text>
+            <Text
+              style={{ color: '#ffffff', fontSize: 25, fontWeight: 'bold', flexDirection: 'row',}}
+            >
+              {file.title}
+            </Text>
           </CardItem>
+          <CardItem style={{ backgroundColor: '#311B92' }}>
+              <Text style={{ color: '#ffffff' }}>
+                {'By: ' + userObj.username}
+              </Text>
+              </CardItem>
           <CardItem
             cardBody
             style={{ borderRadius: 5, padding: 10, backgroundColor: '#311B92' }}
@@ -134,15 +161,20 @@ const Event = ({ route, navigation }) => {
               borderRadius: 20,
             }}
           >
-            <Text style={{ color: '#ffffff' }}>
-              {'Information: ' + description}
+              <Text
+              style={{ color: '#ffffff', fontWeight: 'bold', fontSize: 20 }}
+            >
+              Info
             </Text>
             <Text style={{ color: '#ffffff' }}>
-              {'Address: ' + address + ', ' + city}
+              { description}
             </Text>
-            <Text style={{ color: '#ffffff' }}>
-              {'Date and time: ' +
-                moment(dateTime).format('MMMM Do YYYY, HH:mm')}
+         
+            <Text style={{ color: '#ffffff', fontSize: 12 }}>
+              {address + ', ' + city}
+            </Text>
+            <Text style={{ color: '#ffffff', fontSize: 12 }}>
+              {moment(dateTime).format('MMMM Do YYYY, HH:mm')}
             </Text>
           </CardItem>
         </Card>

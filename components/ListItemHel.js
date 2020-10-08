@@ -1,7 +1,6 @@
-import { StatusBar } from 'expo-status-bar';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { StyleSheet, Text, Image } from 'react-native';
+import { Text, Image } from 'react-native';
 import {
   ListItem as CoolListItem,
   Thumbnail,
@@ -11,7 +10,7 @@ import {
   Button,
   Icon,
 } from 'native-base';
-import moment from "moment";
+import moment from 'moment';
 
 const ListItem = ({ navigation, singleEvent }) => {
   return (
@@ -26,30 +25,26 @@ const ListItem = ({ navigation, singleEvent }) => {
       <Body>
         <Text>{singleEvent.name}</Text>
         <Text>{singleEvent.city}</Text>
-        <Text>{moment(singleEvent.datetime).format('MMMM Do YYYY, HH:mm')}</Text>   
-          </Body>
-        <Right>
-            <Button transparent  onPress={() => {
+        <Text>
+          {moment(singleEvent.datetime).format('MMMM Do YYYY, HH:mm')}
+        </Text>
+      </Body>
+      <Right>
+        <Button
+          transparent
+          onPress={() => {
             navigation.navigate('SingleHelEvent', {
               file: singleEvent,
             });
-          }}>
-            <Icon name={'eye'}></Icon>
-              <Text>View</Text>
-            </Button>
-          </Right>
+          }}
+        >
+          <Icon name={'eye'}></Icon>
+          <Text>View</Text>
+        </Button>
+      </Right>
     </CoolListItem>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
 
 ListItem.propTypes = {
   navigation: PropTypes.object,

@@ -1,6 +1,5 @@
-import {useState} from 'react';
+import { useState } from 'react';
 import { validator } from '../validators/validator';
-
 
 const constraints = {
   comment: {
@@ -35,26 +34,23 @@ const useAddCommentForm = (callback) => {
       };
     });
   };
-  
 
+  const validateOnSend = () => {
+    const commentError = validator('comment', inputs.comment, constraints);
 
-const validateOnSend = () => {
-  const commentError = validator('comment', inputs.comment, constraints);
+    if (commentError !== null) {
+      return false;
+    } else {
+      return true;
+    }
+  };
 
-
-  if (commentError !== null ) {
-    return false;
-  } else {
-    return true;
-  }
-};
-
-return {
-  handleInputChange,
-  inputs,
-  addCommentErrors,
-  validateOnSend,
-};
+  return {
+    handleInputChange,
+    inputs,
+    addCommentErrors,
+    validateOnSend,
+  };
 };
 
 export default useAddCommentForm;

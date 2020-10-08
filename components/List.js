@@ -1,23 +1,20 @@
 import React from 'react';
-import {
-  FlatList,
-} from 'react-native';
+import { FlatList } from 'react-native';
 import ListItem from './ListItem';
-import PropTypes from 'prop-types';
-import {getComments, useLoadEvent} from '../hooks/APIhooks';
+import { useLoadEvent } from '../hooks/APIhooks';
 
-const List = ({navigation}) => {
-      const eventArray = useLoadEvent();
-      // console.log('event array', eventArray);
+const List = ({ navigation }) => {
+  const eventArray = useLoadEvent();
+
   return (
-<FlatList
+    <FlatList
       data={eventArray}
       keyExtractor={(item, index) => index.toString()}
-      renderItem={({item}) =>
+      renderItem={({ item }) => (
         <ListItem navigation={navigation} singleEvent={item} />
-      }>
-      </FlatList>
- )};
-
+      )}
+    ></FlatList>
+  );
+};
 
 export default List;

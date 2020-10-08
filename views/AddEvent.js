@@ -2,7 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, Image, View } from 'react-native';
 import PropTypes from 'prop-types';
 import { StatusBar } from 'expo-status-bar';
-import { Container, Header, Content, Form, Button, Icon, Spinner } from 'native-base';
+import {
+  Container,
+  Header,
+  Content,
+  Form,
+  Button,
+  Icon,
+  Spinner,
+} from 'native-base';
 import FormTextInput from '../components/FormTextInput';
 import * as Permissions from 'expo-permissions';
 import * as ImagePicker from 'expo-image-picker';
@@ -10,7 +18,7 @@ import useAddEventForm from '../hooks/AddEventHooks';
 import { postEvent, postTag } from '../hooks/APIhooks';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import AsyncStorage from '@react-native-community/async-storage';
-import {Video} from 'expo-av';
+import { Video } from 'expo-av';
 
 const AddEvent = ({ navigation }) => {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
@@ -30,9 +38,6 @@ const AddEvent = ({ navigation }) => {
   };
 
   const handleConfirm = (date) => {
-    // const euroDate =
-    //   date.getDate() + '.' + date.getMonth() + '.' + date.getFullYear();
-    // const dateFormatted = euroDate + ' ' + date.toLocaleTimeString();
     setDateTime(date);
     hideDatePicker();
   };
@@ -137,16 +142,20 @@ const AddEvent = ({ navigation }) => {
             )}
           </>
         )}
-
-        <Button block onPress={pickImage}>
-          <Icon name={'camera'}></Icon>
-          <Text>Select image</Text>
-        </Button>
-        <Button block onPress={showDatePicker}>
-          <Icon name={'calendar'}></Icon>
-
-          <Text>Select date and time</Text>
-        </Button>
+        <View style={{ flexDirection: 'column' }}>
+          <View>
+            <Button block style={{ flex:1 , marginBottom:10 }} onPress={pickImage}>
+              <Icon name={'camera'}></Icon>
+              <Text>Select image</Text>
+            </Button>
+          </View>
+          <View>
+            <Button block style={{ flex:1 ,  }} onPress={showDatePicker}>
+              <Icon name={'calendar'}></Icon>
+              <Text>Select date and time</Text>
+            </Button>
+          </View>
+        </View>
         <Form style={{ padding: 15 }}>
           <FormTextInput
             autoCapitalize='none'
@@ -185,7 +194,7 @@ const AddEvent = ({ navigation }) => {
           onConfirm={handleConfirm}
           onCancel={hideDatePicker}
         />
-          {isLoading && <Spinner color='blue'/>}
+        {isLoading && <Spinner color='blue' />}
         <Button
           large
           icon
@@ -212,8 +221,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    // alignItems: 'center',
-    // justifyContent: 'center',
     paddingTop: 40,
   },
   button: {

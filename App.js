@@ -1,6 +1,6 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, { useState, useEffect } from 'react';
 import Navigator from './navigator/Navigator';
-import {AuthProvider} from './contexts/AuthContext';
+import { AuthProvider } from './contexts/AuthContext';
 import * as Expo from 'expo';
 import * as Font from 'expo-font';
 
@@ -19,9 +19,7 @@ const App = () => {
 
   if (!fontReady) {
     console.log('Waiting for fonts...');
-    return (
-      <Expo.AppLoading />
-    );
+    return <Expo.AppLoading />;
   }
 
   return (

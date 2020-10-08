@@ -1,19 +1,10 @@
 import React from 'react';
 import { Image, StyleSheet, StatusBar } from 'react-native';
 import PropTypes from 'prop-types';
-import {
-  Card,
-  CardItem,
-  Text,
-  Content,
-  Container,
-
-} from 'native-base';
+import { Card, CardItem, Text, Content, Container } from 'native-base';
 import moment from 'moment';
 
-
 const SingleHelEvent = ({ route, navigation }) => {
-
   const { file } = route.params;
 
   return (
@@ -52,15 +43,17 @@ const SingleHelEvent = ({ route, navigation }) => {
               borderRadius: 20,
             }}
           >
-            <Text style={{ color: '#ffffff' }}>
-              {'Information: ' + file.description}
+            <Text
+              style={{ color: '#ffffff', fontWeight: 'bold', fontSize: 20 }}
+            >
+              Info
             </Text>
-            <Text style={{ color: '#ffffff' }}>
-              {'Address: ' + file.address.street_address}
+            <Text style={{ color: '#ffffff' }}>{file.description}</Text>
+            <Text style={{ color: '#ffffff', fontSize: 12 }}>
+              {file.address.street_address}
             </Text>
-            <Text style={{ color: '#ffffff' }}>
-              {'Date and time: ' +
-                moment(file.datetime).format('MMMM Do YYYY, HH:mm')}
+            <Text style={{ color: '#ffffff', fontSize: 12 }}>
+              {moment(file.datetime).format('MMMM Do YYYY, HH:mm')}
             </Text>
           </CardItem>
         </Card>
@@ -72,9 +65,7 @@ const SingleHelEvent = ({ route, navigation }) => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#546E7A',
-
     paddingTop: 10,
-    //  paddingHorizontal: 5,
   },
   card: {
     backgroundColor: '#311B92',

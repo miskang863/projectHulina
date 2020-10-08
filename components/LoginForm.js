@@ -8,7 +8,6 @@ import useLoginForm from '../hooks/LoginHooks';
 import { Form, Button, Text } from 'native-base';
 
 const LoginForm = ({ navigation }) => {
-  //tämä on rikki
   const { setIsLoggedIn } = useContext(AuthContext);
   const {
     handleInputChange,
@@ -36,14 +35,14 @@ const LoginForm = ({ navigation }) => {
   return (
     <Form>
       <FormTextInput
-        autoCapitalize="none"
-        placeholder="username"
+        autoCapitalize='none'
+        placeholder='username'
         onChangeText={(txt) => handleInputChange('username', txt)}
         error={loginErrors.username}
       />
       <FormTextInput
-        autoCapitalize="none"
-        placeholder="password"
+        autoCapitalize='none'
+        placeholder='password'
         onChangeText={(txt) => handleInputChange('password', txt)}
         secureTextEntry={true}
         error={loginErrors.password}

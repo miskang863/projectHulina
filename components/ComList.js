@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { FlatList } from 'react-native';
 import ListItem from './ComListItem';
-import PropTypes from 'prop-types';
-import { useLoadComments, useLoadEvent } from '../hooks/APIhooks';
+import { useLoadComments } from '../hooks/APIhooks';
 
 const List = ({ navigation, file }) => {
   const [commentArray, setCommentArray] = useState([]);

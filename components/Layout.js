@@ -21,25 +21,19 @@ const Layout = (props) => {
   return (
     <Container>
       <Header>
-
         <Left>
-          {props.backButton &&
-            <Button
-              transparent
-              onPress={handleBackButtonClick}
-            >
+          {props.backButton && (
+            <Button transparent onPress={handleBackButtonClick}>
               <Icon name='arrow-back' />
-            </Button>}
-
+            </Button>
+          )}
         </Left>
         <Body>
           <Title>MyApp</Title>
         </Body>
         <Right></Right>
       </Header>
-      <Content padder>
-        {props.children}
-      </Content>
+      <Content padder>{props.children}</Content>
     </Container>
   );
 };

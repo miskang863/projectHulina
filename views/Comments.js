@@ -1,10 +1,8 @@
-
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { StyleSheet, Text, Image, View, StatusBar } from 'react-native';
+import { StyleSheet, Text, View, StatusBar } from 'react-native';
 import List from '../components/ComList';
-import { FlatList } from 'react-native-gesture-handler';
-import { Button, Form, Header, Icon } from 'native-base';
+import { Button, Form, Icon } from 'native-base';
 import FormTextInput from '../components/FormTextInput';
 import useAddCommentForm from '../hooks/CommentHooks';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -23,7 +21,7 @@ const Comments = ({ navigation, route }) => {
         },
         userToken
       );
-      navigation.replace('Comments', {file: file})
+      navigation.replace('Comments', { file: file });
     } catch (e) {
       console.log('Comment error', e.message);
     }
@@ -31,9 +29,9 @@ const Comments = ({ navigation, route }) => {
 
   return (
     <View style={styles.container}>
-      <List  navigation={navigation} file={file} />
+      <List navigation={navigation} file={file} />
       <StatusBar backgroundColor='#140078' barStyle='light-content' />
-      <Form style={{  }}>
+      <Form style={{}}>
         <FormTextInput
           autoCapitalize='none'
           placeholder='Write comment'
@@ -58,9 +56,7 @@ const Comments = ({ navigation, route }) => {
 
 const styles = StyleSheet.create({
   container: {
-    
     backgroundColor: '#512ca8',
-    //  paddingHorizontal: 5,
     flex: 1,
   },
   button: {

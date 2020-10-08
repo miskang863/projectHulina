@@ -10,7 +10,11 @@ import Login from '../views/Login';
 import Comments from '../views/Comments';
 import HelEvent from '../views/HelEvent';
 import { AuthContext } from '../contexts/AuthContext';
+import { Icon } from 'react-native-elements';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import AsyncStorage from '@react-native-community/async-storage';
 import SingleHelEvent from '../views/SingleHelEvent';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -30,16 +34,58 @@ const TabScreen = () => {
     <Tab.Navigator>
       {isLoggedIn ? (
         <>
-          <Tab.Screen name='Home' component={Home} />
-          <Tab.Screen name='HelEvent' component={HelEvent} />
-          <Tab.Screen name='Add Event' component={AddEvent} />
-          <Tab.Screen name='Profile' component={Profile} />
+          <Tab.Screen
+            name='Private Events'
+            component={Home}
+            options={{
+              tabBarIcon: ({ color, size }) => <Icon name='home'></Icon>,
+            }}
+          />
+            <Tab.Screen
+              name='Public Events'
+              component={HelEvent}
+              options={{
+                tabBarIcon: ({ color, size }) => <Icon name='event'></Icon>,
+              }}
+            />
+          <Tab.Screen
+            name='Add Event'
+            component={AddEvent}
+            options={{
+              tabBarIcon: ({ color, size }) => <Icon name='add'></Icon>,
+            }}
+          />
+          <Tab.Screen
+            name='Profile'
+            component={Profile}
+            options={{
+              tabBarIcon: ({ color, size }) => <Icon name='face'></Icon>,
+            }}
+          />
         </>
       ) : (
         <>
-          <Tab.Screen name='Home' component={Home} />
-          <Tab.Screen name='HelEvent' component={HelEvent} />
-          <Tab.Screen name='Login' component={Login} />
+          <Tab.Screen
+            name='Home'
+            component={Home}
+            options={{
+              tabBarIcon: ({ color, size }) => <Icon name='home'></Icon>,
+            }}
+          />
+          <Tab.Screen
+            name='Puplic Event'
+            component={HelEvent}
+            options={{
+              tabBarIcon: ({ color, size }) => <Icon name='event'></Icon>,
+            }}
+          />
+          <Tab.Screen
+            name='Login'
+            component={Login}
+            options={{
+              tabBarIcon: ({ color, size }) => <Icon name='lock'></Icon>,
+            }}
+          />
         </>
       )}
     </Tab.Navigator>
@@ -47,7 +93,11 @@ const TabScreen = () => {
 };
 
 const StackScreen = () => {
-  const { isLoggedIn } = useContext(AuthContext);
+  const { setIsLoggedIn, isLoggedIn } = useContext(AuthContext);
+  const logout = async () => {
+    setIsLoggedIn(false);
+    await AsyncStorage.clear();
+  };
   return (
     <Stack.Navigator>
       {isLoggedIn ? (
@@ -57,10 +107,19 @@ const StackScreen = () => {
             component={TabScreen}
             options={{
               headerStyle: {
-                backgroundColor: '#445963',
+                backgroundColor: '#7C4DFF',
               },
               headerTintColor: '#fff',
-              title: 'Helsingin Hulinat',
+              headerTitle: 'Hulinat App',
+              headerRight: () => (
+                <TouchableOpacity onPress={logout}>
+                  <MaterialCommunityIcons
+                    name='logout'
+                    size={30}
+                    color='black'
+                  />
+                </TouchableOpacity>
+              ),
             }}
           />
           <Stack.Screen name='HelEvent' component={TabScreen} />
@@ -120,7 +179,7 @@ const StackScreen = () => {
               headerTintColor: '#fff',
             }}
           />
-                    <Stack.Screen
+          <Stack.Screen
             name='SingleHelEvent'
             component={SingleHelEvent}
             options={{

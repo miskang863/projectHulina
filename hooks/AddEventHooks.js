@@ -1,6 +1,5 @@
-import {useState} from 'react';
+import { useState } from 'react';
 import { validator } from '../validators/validator';
-
 
 const constraints = {
   title: {
@@ -65,33 +64,35 @@ const useAddEventForm = (callback) => {
       };
     });
   };
-  
 
+  const validateOnSend = () => {
+    const titleError = validator('title', inputs.title, constraints);
+    const descriptionError = validator(
+      'description',
+      inputs.description,
+      constraints
+    );
+    const addressError = validator('address', inputs.address, constraints);
+    const cityError = validator('city', inputs.city, constraints);
 
-const validateOnSend = () => {
-  const titleError = validator('title', inputs.title, constraints);
-  const descriptionError = validator(
-    'description',
-    inputs.description,
-    constraints
-  );
-  const addressError = validator('address', inputs.address, constraints);
-  const cityError = validator('city', inputs.city, constraints);
+    if (
+      titleError !== null ||
+      descriptionError !== null ||
+      addressError !== null ||
+      cityError == !null
+    ) {
+      return false;
+    } else {
+      return true;
+    }
+  };
 
-  if (titleError !== null || descriptionError !== null 
-      || addressError !== null || cityError ==! null) {
-    return false;
-  } else {
-    return true;
-  }
-};
-
-return {
-  handleInputChange,
-  inputs,
-  addEventErrors,
-  validateOnSend,
-};
+  return {
+    handleInputChange,
+    inputs,
+    addEventErrors,
+    validateOnSend,
+  };
 };
 
 export default useAddEventForm;

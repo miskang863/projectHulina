@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { FlatList } from 'react-native';
 import ListItemHel from './ListItemHel';
-import PropTypes from 'prop-types';
-import { getComments, useLoadEvent } from '../hooks/APIhooks';
 
 const ListHel = ({ navigation }) => {
   const [eventsHel, setEventsHel] = useState([]);
-
   const apiUrl = 'http://open-api.myhelsinki.fi/v1/events/?limit=20';
+
   const loadEvent = async () => {
     try {
       const response = await fetch(apiUrl);
@@ -35,7 +33,6 @@ const ListHel = ({ navigation }) => {
           images: images,
         };
         helEvents.push(event);
-        console.log('event image', event.images)
       }
       setEventsHel(helEvents);
     } catch (e) {

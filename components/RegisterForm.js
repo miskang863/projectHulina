@@ -35,12 +35,11 @@ const RegisterForm = ({ navigation }) => {
     }
   };
 
-
   return (
     <View>
       <FormTextInput
-        autoCapitalize="none"
-        placeholder="username"
+        autoCapitalize='none'
+        placeholder='username'
         onChangeText={(txt) => handleInputChange('username', txt)}
         onEndEditing={(event) => {
           checkUserAvailable(event);
@@ -49,31 +48,31 @@ const RegisterForm = ({ navigation }) => {
         error={registerErrors.username}
       />
       <FormTextInput
-        autoCapitalize="none"
-        placeholder="password"
+        autoCapitalize='none'
+        placeholder='password'
         onChangeText={(txt) => handleInputChange('password', txt)}
         onEndEditing={(event) => handleInputEnd('password', event)}
         secureTextEntry={true}
         error={registerErrors.password}
       />
       <FormTextInput
-        autoCapitalize="none"
-        placeholder="confirm password"
+        autoCapitalize='none'
+        placeholder='confirm password'
         onChangeText={(txt) => handleInputChange('confirmPassword', txt)}
         onEndEditing={(event) => handleInputEnd('confirmPassword', event)}
         secureTextEntry={true}
         error={registerErrors.confirmPassword}
       />
       <FormTextInput
-        autoCapitalize="none"
-        placeholder="email"
+        autoCapitalize='none'
+        placeholder='email'
         onChangeText={(txt) => handleInputChange('email', txt)}
         onEndEditing={(event) => handleInputEnd('email', event)}
         error={registerErrors.email}
       />
       <FormTextInput
-        autoCapitalize="none"
-        placeholder="full name"
+        autoCapitalize='none'
+        placeholder='full name'
         onChangeText={(txt) => handleInputChange('full_name', txt)}
         onEndEditing={(event) => handleInputEnd('full_name', event)}
         error={registerErrors.full_name}

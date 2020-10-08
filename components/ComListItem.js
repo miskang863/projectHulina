@@ -1,18 +1,16 @@
 import { StatusBar } from 'expo-status-bar';
 import PropTypes from 'prop-types';
-import React, {  useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text } from 'react-native';
-import {
-  ListItem as CoolListItem,
-  Body,
-} from 'native-base';
-import { getUser, getUserForComs } from '../hooks/APIhooks';
+import { ListItem as CoolListItem, Body } from 'native-base';
+import { getUserForComs } from '../hooks/APIhooks';
 import AsyncStorage from '@react-native-community/async-storage';
 
 const ListItem = ({ navigation, singleComment }) => {
   const [userObj, setUserObj] = useState({});
 
-  const userData = async () => { //Get the username of commenter
+  const userData = async () => {
+    //Get the username of commenter
     try {
       const userToken = await AsyncStorage.getItem('userToken');
       const user = await getUserForComs(userToken, singleComment.user_id);
@@ -32,9 +30,9 @@ const ListItem = ({ navigation, singleComment }) => {
 
   return (
     <CoolListItem noBorder thumbnail>
-      <Body >
-        <Text style={{color: 'white'}}>{dateFormatted}</Text>
-        <Text style={{color: 'white'}}>
+      <Body>
+        <Text style={{ color: 'white' }}>{dateFormatted}</Text>
+        <Text style={{ color: 'white' }}>
           {userObj.username}: {singleComment.comment}
         </Text>
       </Body>

@@ -44,7 +44,6 @@ const useLoadComments = async (file_id) => {
   useEffect(() => {
     loadComment();
   }, []);
-  // console.log('comment array', commentArray)
 
   return commentArray;
 };
@@ -70,7 +69,7 @@ const postEvent = async (formData, userToken) => {
 const checkToken = async (token) => {
   const options = {
     method: 'GET',
-    headers: {'x-access-token': token},
+    headers: { 'x-access-token': token },
   };
   try {
     const response = await fetch(apiUrl + 'users/user', options);
@@ -169,10 +168,10 @@ const postComment = async (comment, token) => {
 };
 
 const postLogIn = async (userCreds) => {
-  console.log("loggedIn");
+  console.log('loggedIn');
   const options = {
     method: 'POST',
-    headers: {'Content-Type': 'application/json'},
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(userCreds),
   };
   try {
@@ -192,7 +191,7 @@ const postRegistration = async (newUser) => {
   delete newUser.confirmPassword;
   const options = {
     method: 'POST',
-    headers: {'Content-Type': 'application/json'},
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(newUser),
   };
   try {
@@ -241,7 +240,6 @@ const checkAvailable = async (username) => {
     throw new Error(e.message);
   }
 };
-
 
 export {
   useLoadEvent,

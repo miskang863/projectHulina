@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import { useState } from 'react';
 import { validator } from '../validators/validator';
 
 const constraints = {
@@ -37,26 +37,25 @@ const useLoginForm = (callback) => {
         [name]: error,
       };
     });
-  setInputs((inputs) => {
-    return {
-      ...inputs,
-      [name]: text,
-    };
-  });
-  }
+    setInputs((inputs) => {
+      return {
+        ...inputs,
+        [name]: text,
+      };
+    });
+  };
 
-const validateOnSend = () => {
-  const usernameError = validator('username', inputs.username, constraints);
-  const passwordError = validator('password', inputs.password, constraints);
+  const validateOnSend = () => {
+    const usernameError = validator('username', inputs.username, constraints);
+    const passwordError = validator('password', inputs.password, constraints);
 
-  if (usernameError !== null || passwordError !== null) {
-    return false;
-  } else {
-    return true;
-  }
-};
+    if (usernameError !== null || passwordError !== null) {
+      return false;
+    } else {
+      return true;
+    }
+  };
 
-  
   return {
     handleInputChange,
     validateOnSend,

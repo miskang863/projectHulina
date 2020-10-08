@@ -10,6 +10,7 @@ import Login from '../views/Login';
 import Comments from '../views/Comments';
 import HelEvent from '../views/HelEvent';
 import { AuthContext } from '../contexts/AuthContext';
+import SingleHelEvent from '../views/SingleHelEvent';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -51,52 +52,85 @@ const StackScreen = () => {
     <Stack.Navigator>
       {isLoggedIn ? (
         <>
-          <Stack.Screen name='Home' component={TabScreen} 
-          options={{
-            headerStyle: {
-              backgroundColor: '#445963',
-            },
-            headerTintColor: '#fff',
-            title: 'Helsingin Hulinat',    
-          }}/>
+          <Stack.Screen
+            name='Home'
+            component={TabScreen}
+            options={{
+              headerStyle: {
+                backgroundColor: '#445963',
+              },
+              headerTintColor: '#fff',
+              title: 'Helsingin Hulinat',
+            }}
+          />
           <Stack.Screen name='HelEvent' component={TabScreen} />
-          <Stack.Screen name='Event' component={Event} 
-                  options={{
-                    headerStyle: {
-                      backgroundColor: '#445963',
-                    },
-                    headerTintColor: '#fff',
-            
-                  }}/>
-          <Stack.Screen name='Comments' component={Comments}
-          options={{
-                    headerStyle: {
-                      backgroundColor: '#140078',
-                    },
-                    headerTintColor: '#fff',
-            
-                  }}
-           />
+          <Stack.Screen
+            name='Event'
+            component={Event}
+            options={{
+              headerStyle: {
+                backgroundColor: '#445963',
+              },
+              headerTintColor: '#fff',
+            }}
+          />
+          <Stack.Screen
+            name='SingleHelEvent'
+            component={SingleHelEvent}
+            options={{
+              headerStyle: {
+                backgroundColor: '#445963',
+              },
+              headerTintColor: '#fff',
+            }}
+          />
+
+          <Stack.Screen
+            name='Comments'
+            component={Comments}
+            options={{
+              headerStyle: {
+                backgroundColor: '#140078',
+              },
+              headerTintColor: '#fff',
+            }}
+          />
         </>
       ) : (
         <>
-          <Stack.Screen name='Home' component={TabScreen} 
-          options={{
-            headerStyle: {
-              backgroundColor: '#445963',
-            },
-            headerTintColor: '#fff',
-            title: 'Helsingin Hulinat',    
-          }}/>
+          <Stack.Screen
+            name='Home'
+            component={TabScreen}
+            options={{
+              headerStyle: {
+                backgroundColor: '#445963',
+              },
+              headerTintColor: '#fff',
+              title: 'Helsingin Hulinat',
+            }}
+          />
           <Stack.Screen name='HelEvent' component={TabScreen} />
-          <Stack.Screen name='Event' component={Event} 
-                  options={{
-                    headerStyle: {
-                      backgroundColor: '#445963',
-                    },
-                    headerTintColor: '#fff',
-            
-                  }}/>
+          <Stack.Screen
+            name='Event'
+            component={Event}
+            options={{
+              headerStyle: {
+                backgroundColor: '#445963',
+              },
+              headerTintColor: '#fff',
+            }}
+          />
+                    <Stack.Screen
+            name='SingleHelEvent'
+            component={SingleHelEvent}
+            options={{
+              headerStyle: {
+                backgroundColor: '#445963',
+              },
+              headerTintColor: '#fff',
+            }}
+          />
+
           <Stack.Screen name='Login' component={Login} />
         </>
       )}

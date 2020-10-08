@@ -35,6 +35,7 @@ const ListHel = ({ navigation }) => {
           images: images,
         };
         helEvents.push(event);
+        console.log('event image', event.images)
       }
       setEventsHel(helEvents);
     } catch (e) {

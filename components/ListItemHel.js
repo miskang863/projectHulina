@@ -27,7 +27,17 @@ const ListItem = ({ navigation, singleEvent }) => {
         <Text>{singleEvent.name}</Text>
         <Text>{singleEvent.city}</Text>
         <Text>{moment(singleEvent.datetime).format('MMMM Do YYYY, HH:mm')}</Text>   
-           </Body>
+          </Body>
+        <Right>
+            <Button transparent  onPress={() => {
+            navigation.navigate('SingleHelEvent', {
+              file: singleEvent,
+            });
+          }}>
+            <Icon name={'eye'}></Icon>
+              <Text>View</Text>
+            </Button>
+          </Right>
     </CoolListItem>
   );
 };

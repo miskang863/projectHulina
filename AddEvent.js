@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, Image, View } from 'react-native';
+import React, { Children, useEffect, useState } from 'react';
+import { ImageBackground, StyleSheet, Text, Image, View } from 'react-native';
 import PropTypes from 'prop-types';
 import { StatusBar } from 'expo-status-bar';
 import { Container, Header, Content, Form, Button, Icon, Spinner } from 'native-base';
@@ -10,7 +10,8 @@ import useAddEventForm from '../hooks/AddEventHooks';
 import { postEvent, postTag } from '../hooks/APIhooks';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import AsyncStorage from '@react-native-community/async-storage';
-import {Video} from 'expo-av';
+import { Video } from 'expo-av';
+import { contains } from 'validate.js';
 
 const AddEvent = ({ navigation }) => {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
@@ -115,48 +116,34 @@ const AddEvent = ({ navigation }) => {
     }
   };
 
+
+
+  //const ImageBackground = { uri: "https://imgur.com/zqwjIDV" };
+  //<ImageBackground style={styles.ImageBackground}
+  //source={ImageBackground}
+  //>
+
+
+  //</ImageBackground>
+
   return (
     <Container style={styles.container}>
-      <Header>
-        <Text>Add Event</Text>
-      </Header>
-      <Content style={{ padding: 5 }}>
-        {image && (
-          <>
-            {fileType == 'image' ? (
-              <Image
-                source={{ uri: image }}
-                style={{ width: null, height: 200, flex: 1 }}
-              />
-            ) : (
-              <Video
-                source={{ uri: image }}
-                style={{ height: 400, width: null, flex: 1 }}
-                useNativeControls={true}
-              />
-            )}
-          </>
-        )}
+      <Text style={{ color: '#fff', fontSize: 18, textAlign: "center", paddingBottom: 20, fontSize: 20, fontStyle: "normal" }}>Add your event</Text>
 
-        <Button block onPress={pickImage}>
-          <Icon name={'camera'}></Icon>
-          <Text>Select image</Text>
-        </Button>
-        <Button block onPress={showDatePicker}>
-          <Icon name={'calendar'}></Icon>
+      <Content style={{ padding: 20 }}>
 
-          <Text>Select date and time</Text>
-        </Button>
-        <Form style={{ padding: 15 }}>
+        <Form style={styles.form}>
           <FormTextInput
             autoCapitalize='none'
             placeholder='Event name'
+            placeholderTextColor="#fff"
             value={inputs.title}
             onChangeText={(txt) => handleInputChange('title', txt)}
             error={addEventErrors.title}
           />
           <FormTextInput
             autoCapitalize='none'
+            placeholderTextColor="#fff"
             placeholder='Description'
             value={inputs.description}
             onChangeText={(txt) => handleInputChange('description', txt)}
@@ -165,14 +152,16 @@ const AddEvent = ({ navigation }) => {
           <FormTextInput
             autoCapitalize='none'
             placeholder='City'
+            placeholderTextColor="#fff"
             value={inputs.city}
             onChangeText={(txt) => handleInputChange('city', txt)}
             error={addEventErrors.city}
           />
 
-          <FormTextInput
+          <FormTextInput style={styles.formInput}
             autoCapitalize='none'
             placeholder='Address'
+            placeholderTextColor="#fff"
             value={inputs.address}
             onChangeText={(txt) => handleInputChange('address', txt)}
             error={addEventErrors.address}
@@ -185,7 +174,18 @@ const AddEvent = ({ navigation }) => {
           onConfirm={handleConfirm}
           onCancel={hideDatePicker}
         />
-          {isLoading && <Spinner color='blue'/>}
+        {isLoading && <Spinner color='blue' />}
+
+        <Button block style={{ flex: 1, marginBottom: 15 }} onPress={pickImage}>
+          <Icon name={'camera'}></Icon>
+          <Text style={{ color: '#fff' }}>Select image</Text>
+        </Button>
+
+        <Button block style={{ marginBottom: 25 }} onPress={showDatePicker}>
+          <Icon name={'calendar'}></Icon>
+          <Text style={{ color: '#fff' }}>Select date and time</Text>
+        </Button>
+
         <Button
           large
           icon
@@ -201,24 +201,72 @@ const AddEvent = ({ navigation }) => {
           onPress={doAddEvent}
         >
           <Icon name='send' />
-          <Text style={{ color: '#fff', paddingRight: 15 }}>Submit</Text>
+          <Text style={{ color: '#fff', paddingRight: 20 }}>Submit</Text>
         </Button>
+
+        {image && (
+          <>
+            {fileType == 'image' ? (
+              <Image
+                source={{ uri: image }}
+                style={{ width: null, height: 200, flex: 1 }}
+              />
+            ) : (
+                <Video
+                  source={{ uri: image }}
+                  style={{ height: 400, width: null, flex: 1 }}
+                  useNativeControls={true}
+                />
+              )}
+          </>
+        )}
+
       </Content>
     </Container>
   );
-};
+}
+
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    // alignItems: 'center',
-    // justifyContent: 'center',
+    backgroundColor: '#283593',
+    justifyContent: "center",
     paddingTop: 40,
+
   },
+
+  ImageBackground: {
+    flex: 1,
+    resizeMode: "cover",
+    justifyContent: "center",
+
+  },
+
+  text: {
+    fontSize: 14,
+    textAlign: "center",
+    paddingVertical: 10,
+    color: '#fff',
+
+  },
+
   button: {
     alignSelf: 'center',
+    backgroundColor: '#78909C',
+    paddingTop: 20,
+
   },
+
+  formInput: {
+    flex: 1,
+    color: '#fff',
+    paddingTop: 10,
+    paddingBottom: 15,
+
+  },
+
+
 });
 
 AddEvent.propTypes = {

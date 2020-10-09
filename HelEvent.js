@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
   },
   headerText: {
     color: '#fff',
-    fontSize: 20,
+    fontSize: 24,
     textAlign: "center",
     fontWeight: "bold",
     justifyContent: "center", 

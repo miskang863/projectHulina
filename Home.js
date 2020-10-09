@@ -32,7 +32,7 @@ const Home = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Header style={{backgroundColor: '#311B92', justifyContent: "center",   }}>
+      <Header style={{backgroundColor: '#311B92', justifyContent: "center" }}>
       <Text style={styles.text}>Hot Right Now:</Text>
       </Header>
       <List navigation={navigation} />
@@ -49,13 +49,14 @@ const styles = StyleSheet.create({
   
   },
   text: {
-    paddingTop: 10,
-    paddingBottom: 5,
+    paddingTop: 15,
+    width: 400,
     fontSize: 18,
     textAlign: "center",
     color: "white",
     fontWeight: "bold", 
     justifyContent: "center", 
+    
       
   }
 

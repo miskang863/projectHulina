@@ -116,8 +116,10 @@ const AddEvent = ({ navigation }) => {
 
   return (
     <Container style={styles.container}>
-      <Header style={{color: '#311B92'}}>
-      <Text style={{ color: '#fff', fontWeight: "bold", fontSize: 20, textAlign: "center", paddingBottom: 5 }}>Add your event</Text>
+      <Header style={{color: '#311B92' }}>
+      <Text style={{  width: 400,
+    paddingTop: 15,
+    color: '#fff', fontWeight: "bold", fontSize: 20, textAlign: "center", paddingBottom: 5 }}>Add your event</Text>
       </Header>
       <Content style={{ padding: 10}}>
 

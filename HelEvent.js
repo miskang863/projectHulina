@@ -34,6 +34,9 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontWeight: "bold",
     justifyContent: "center", 
+    width: 400,
+    paddingTop: 15,
+    
     
   },
 });

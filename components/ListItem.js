@@ -28,9 +28,9 @@ const ListItem = ({ navigation, singleEvent }) => {
         />
       </Left>
       <Body>
-        <Text>{singleEvent.title}</Text>
-        <Text>{city}</Text>
-        <Text>{moment(dateTime).format('MMMM Do YYYY, HH:mm')}</Text>
+        <Text style={{color: "white"}}>{singleEvent.title}</Text>
+        <Text style={{color: "white"}}>{city}</Text>
+        <Text style={{color: "white"}}>{moment(dateTime).format('MMMM Do YYYY, HH:mm')}</Text>
       </Body>
       <Right>
         <Button

@@ -116,7 +116,7 @@ const StackScreen = () => {
                   <MaterialCommunityIcons
                     name='logout'
                     size={30}
-                    color='black'
+                    color='white'
                   />
                 </TouchableOpacity>
               ),

@@ -4,7 +4,7 @@ import ListItemHel from './ListItemHel';
 
 const ListHel = ({ navigation }) => {
   const [eventsHel, setEventsHel] = useState([]);
-  const apiUrl = 'http://open-api.myhelsinki.fi/v1/events/?limit=20';
+  const apiUrl = 'http://open-api.myhelsinki.fi/v1/events/?limit=40';
 
   const loadEvent = async () => {
     try {

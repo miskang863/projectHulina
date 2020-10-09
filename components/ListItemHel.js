@@ -23,9 +23,9 @@ const ListItem = ({ navigation, singleEvent }) => {
         )}
       </Left>
       <Body>
-        <Text>{singleEvent.name}</Text>
-        <Text>{singleEvent.city}</Text>
-        <Text>
+        <Text style={{color: "white"}}>{singleEvent.name}</Text>
+        <Text style={{color: "white"}}>{singleEvent.city}</Text>
+        <Text style={{color: "white"}}>
           {moment(singleEvent.datetime).format('MMMM Do YYYY, HH:mm')}
         </Text>
       </Body>
@@ -38,8 +38,8 @@ const ListItem = ({ navigation, singleEvent }) => {
             });
           }}
         >
-          <Icon name={'eye'}></Icon>
-          <Text>View</Text>
+          <Icon style={{color: "white"}} name={'eye'}></Icon>
+          <Text style={{color: "white"}}>View</Text>
         </Button>
       </Right>
     </CoolListItem>

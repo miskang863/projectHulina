@@ -64,7 +64,7 @@ const AddEvent = ({ navigation }) => {
       const postTagResponse = await postTag(
         {
           file_id: resp.file_id,
-          tag: 'helsinginhulinat9999',
+          tag: 'helsinginhulinat666',
         },
         userToken
       );
@@ -116,8 +116,49 @@ const AddEvent = ({ navigation }) => {
 
   return (
     <Container style={styles.container}>
-      <Text style={{ color: '#fff', fontSize: 18, textAlign: "center", paddingBottom: 20 }}>Please, add your event</Text>
-      <Content style={{ padding: 20 }}>
+      <Header style={{color: '#311B92' }}>
+      <Text style={{  width: 400,
+    paddingTop: 15,
+    color: '#fff', fontWeight: "bold", fontSize: 24, textAlign: "center", paddingBottom: 5 }}>Add your event</Text>
+      </Header>
+      <Content style={{ padding: 10}}>
+
+        <Form style={styles.form}>
+          <FormTextInput
+            autoCapitalize='none'
+            placeholder='Event name'
+            placeholderTextColor="#fff"
+            value={inputs.title}
+            onChangeText={(txt) => handleInputChange('title', txt)}
+            error={addEventErrors.title}
+          />
+          <FormTextInput
+            autoCapitalize='none'
+            placeholder='Description'
+            placeholderTextColor="#fff"
+            value={inputs.description}
+            onChangeText={(txt) => handleInputChange('description', txt)}
+            error={addEventErrors.description}
+          />
+          <FormTextInput
+            autoCapitalize='none'
+            placeholder='City'
+            placeholderTextColor="#fff"
+            value={inputs.city}
+            onChangeText={(txt) => handleInputChange('city', txt)}
+            error={addEventErrors.city}
+          />
+
+          <FormTextInput style={styles.formInput}
+            autoCapitalize='none'
+            placeholder='Address'
+            placeholderTextColor="#fff"
+            value={inputs.address}
+            onChangeText={(txt) => handleInputChange('address', txt)}
+            error={addEventErrors.address}
+          />
+        </Form>
+
         {image && (
           <>
             {fileType == 'image' ? (
@@ -135,51 +176,16 @@ const AddEvent = ({ navigation }) => {
           </>
         )}
 
-        <Button block style={{ flex: 1, marginBottom: 20 }} onPress={pickImage}>
+        <Button block style={{ flex: 1, marginBottom: 20, borderRadius: 15 }} onPress={pickImage}>
           <Icon name={'camera'}></Icon>
-          <Text style={{ color: '#fff', }}>Select image</Text>
+          <Text style={{ color: '#fff', paddingRight: 30 }}>SELECT IMAGE</Text>
         </Button>
 
-        <Button block onPress={showDatePicker}>
+        <Button block style={{borderRadius: 15}} onPress={showDatePicker}>
           <Icon name={'calendar'}></Icon>
-
-          <Text style={{ color: '#fff' }}>Select date and time</Text>
+          <Text style={{ color: '#fff', paddingRight: 30 }}>SELECT DATA AND TIME</Text>
         </Button>
-        <Form style={styles.form}>
-          <FormTextInput
-            autoCapitalize='none'
-            placeholder='Event name'
-            placeholderTextColor= "#fff"
-            value={inputs.title}
-            onChangeText={(txt) => handleInputChange('title', txt)}
-            error={addEventErrors.title}
-          />
-          <FormTextInput
-            autoCapitalize='none'
-            placeholder='Description'
-            placeholderTextColor= "#fff"
-            value={inputs.description}
-            onChangeText={(txt) => handleInputChange('description', txt)}
-            error={addEventErrors.description}
-          />
-          <FormTextInput
-            autoCapitalize='none'
-            placeholder='City'
-            placeholderTextColor= "#fff"
-            value={inputs.city}
-            onChangeText={(txt) => handleInputChange('city', txt)}
-            error={addEventErrors.city}
-          />
 
-          <FormTextInput style={styles.formInput}
-            autoCapitalize='none'
-            placeholder='Address'
-            placeholderTextColor= "#fff"
-            value={inputs.address}
-            onChangeText={(txt) => handleInputChange('address', txt)}
-            error={addEventErrors.address}
-          />
-        </Form>
         <DateTimePickerModal
           isVisible={isDatePickerVisible}
           mode='datetime'
@@ -192,14 +198,13 @@ const AddEvent = ({ navigation }) => {
           large
           icon
           style={styles.button}
-          disabled={  image === null }
+          disabled={image === null}
           onPress={doAddEvent}
         >
-          <Icon name='send' />
-          <Text style={{ color: '#fff', paddingRight: 15 }}>Submit</Text>
+           <Icon name='send' />
+          <Text style={{ color: '#fff', paddingRight: 30 }}>SUBMIT</Text>
         </Button>
       </Content>
-
     </Container>
   );
 }
@@ -208,9 +213,9 @@ const AddEvent = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#283593',
+    backgroundColor: '#311B92',
     justifyContent: "center",
-    paddingTop: 40,
+           
   },
 
   ImageBackground: {
@@ -224,14 +229,17 @@ const styles = StyleSheet.create({
     textAlign: "center",
     paddingVertical: 15,
     color: '#fff',
+    paddingTop: 5,
 
   },
 
   button: {
     alignSelf: 'center',
-    backgroundColor: '#78909C',
-    paddingTop: 10,
-
+    margin: 30,
+    backgroundColor: '#7C4DFF',
+    borderRadius: 15,
+    
+    
   },
 
   formInput: {

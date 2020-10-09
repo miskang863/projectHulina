@@ -8,10 +8,9 @@ import { Header } from 'native-base';
 const HelEvent = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <Header>
+      <Header style={{backgroundColor: '#311B92'}}>
         <Text style={styles.headerText}>Public Events</Text>
       </Header>
-      <Text>Right Now in Helsinki:</Text>
       <ListHel navigation={navigation} />
       <StatusBar style='dark' />
     </View>
@@ -20,13 +19,18 @@ const HelEvent = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 20,
+    paddingTop: 0,
     backgroundColor: 'white',
+    backgroundColor: '#455a64',
   },
   headerText: {
     color: '#fff',
-    paddingTop: 20,
-    fontSize: 18,
+    fontSize: 24,
+    textAlign: "center",
+    fontWeight: "bold",
+    justifyContent: "center", 
+    width: 400,
+    paddingTop: 15,
   },
 });
 
